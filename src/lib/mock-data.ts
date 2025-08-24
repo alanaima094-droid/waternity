@@ -15,6 +15,7 @@ export interface Well {
   monthlyRevenue: number;
   peopleServed: number;
   wellPassportNFT: string;
+  nftPassport: string; // Alias for wellPassportNFT
   operatorAddress: string;
   escrowAddress: string;
   deviceId: string;
@@ -25,6 +26,12 @@ export interface Well {
     hcs: string[];
     hts: string[];
   };
+  documents: Array<{
+    name: string;
+    type: string;
+    size: string;
+    date: string;
+  }>;
 }
 
 export interface Transaction {
@@ -62,6 +69,7 @@ export const mockWells: Well[] = [
     monthlyRevenue: 6250,
     peopleServed: 850,
     wellPassportNFT: '0.0.123456',
+    nftPassport: '0.0.123456',
     operatorAddress: '0.0.789012',
     escrowAddress: '0.0.345678',
     deviceId: 'BWA-001',
@@ -80,6 +88,11 @@ export const mockWells: Well[] = [
         '0.0.987654-1704240000-3',
       ],
     },
+    documents: [
+      { name: 'Well Installation Report', type: 'PDF', size: '2.4 MB', date: '2024-01-15' },
+      { name: 'Water Quality Certificate', type: 'PDF', size: '1.2 MB', date: '2024-01-20' },
+      { name: 'Maintenance Schedule', type: 'PDF', size: '0.8 MB', date: '2024-01-10' },
+    ],
   },
   {
     id: 'well-002',
@@ -96,6 +109,7 @@ export const mockWells: Well[] = [
     monthlyRevenue: 5880,
     peopleServed: 720,
     wellPassportNFT: '0.0.123457',
+    nftPassport: '0.0.123457',
     operatorAddress: '0.0.789013',
     escrowAddress: '0.0.345679',
     deviceId: 'JSB-002',
@@ -130,6 +144,7 @@ export const mockWells: Well[] = [
     monthlyRevenue: 7020,
     peopleServed: 1100,
     wellPassportNFT: '0.0.123458',
+    nftPassport: '0.0.123458',
     operatorAddress: '0.0.789014',
     escrowAddress: '0.0.345680',
     deviceId: 'SG-003',
@@ -164,6 +179,7 @@ export const mockWells: Well[] = [
     monthlyRevenue: 4785,
     peopleServed: 650,
     wellPassportNFT: '0.0.123459',
+    nftPassport: '0.0.123459',
     operatorAddress: '0.0.789015',
     escrowAddress: '0.0.345681',
     deviceId: 'MD-004',
@@ -198,6 +214,7 @@ export const mockWells: Well[] = [
     monthlyRevenue: 5376,
     peopleServed: 890,
     wellPassportNFT: '0.0.123460',
+    nftPassport: '0.0.123460',
     operatorAddress: '0.0.789016',
     escrowAddress: '0.0.345682',
     deviceId: 'YE-005',
@@ -232,6 +249,7 @@ export const mockWells: Well[] = [
     monthlyRevenue: 4888,
     peopleServed: 780,
     wellPassportNFT: '0.0.123461',
+    nftPassport: '0.0.123461',
     operatorAddress: '0.0.789017',
     escrowAddress: '0.0.345683',
     deviceId: 'MZ-006',
@@ -267,6 +285,7 @@ export const mockWells: Well[] = [
     monthlyRevenue: 900,
     peopleServed: 1200,
     wellPassportNFT: '0.0.123462',
+    nftPassport: '0.0.123462',
     operatorAddress: '0.0.789018',
     escrowAddress: '0.0.345684',
     deviceId: 'RLI-007',
@@ -301,6 +320,7 @@ export const mockWells: Well[] = [
     monthlyRevenue: 0,
     peopleServed: 0, // Target: 800
     wellPassportNFT: '0.0.123463',
+    nftPassport: '0.0.123463',
     operatorAddress: '0.0.789019',
     escrowAddress: '0.0.345685',
     deviceId: 'PCW-008',
@@ -327,6 +347,7 @@ export const mockWells: Well[] = [
     monthlyRevenue: 320,
     peopleServed: 950,
     wellPassportNFT: '0.0.123464',
+    nftPassport: '0.0.123464',
     operatorAddress: '0.0.789020',
     escrowAddress: '0.0.345686',
     deviceId: 'FIR-009',

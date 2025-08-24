@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -22,10 +22,47 @@ import {
   CheckCircle,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const WellLedger = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [selectedWellId, setSelectedWellId] = useState('well-001');
   const [activeSubTab, setActiveSubTab] = useState('overview');
+
+  // Initialize from URL search params on mount or when URL changes
+  useEffect(() => {
+    const id = searchParams.get('id');
+    const tab = searchParams.get('tab');
+
+    if (id && id !== selectedWellId) {
+      // Fallback: ensure id exists in mockWells
+      const exists = mockWells.some(w => w.id === id);
+      if (exists) setSelectedWellId(id);
+    }
+    if (tab && tab !== activeSubTab) {
+      const allowed = ['overview', 'liter-timeline', 'settlement', 'reconciliation', 'documents'];
+      if (allowed.includes(tab)) setActiveSubTab(tab);
+    }
+  }, [searchParams]);
+
+  const updateUrl = (id: string, tab: string) => {
+    const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+    params.set('id', id);
+    params.set('tab', tab);
+    router.replace(`?${params.toString()}`);
+  };
+
+  const handleWellChange = (value: string) => {
+    setSelectedWellId(value);
+    updateUrl(value, activeSubTab);
+  };
+
+  const handleTabChange = (value: string) => {
+    setActiveSubTab(value);
+    updateUrl(selectedWellId, value);
+  };
 
   const selectedWell = getWellById(selectedWellId);
   const wellTransactions = getTransactionsByWellId(selectedWellId);
@@ -68,10 +105,10 @@ const WellLedger = () => {
           <span className="font-semibold text-sm">Volume</span>
         </div>
         <div className="text-2xl font-bold text-[hsl(var(--foreground))]">
-          {selectedWell.totalVolume.toLocaleString()}
+          {selectedWell.totalVolume.toLocaleString()} L
         </div>
         <div className="text-sm text-[hsl(var(--muted-foreground))]">
-          Liters dispensed
+          Total dispensed
         </div>
       </div>
 
@@ -84,7 +121,7 @@ const WellLedger = () => {
           ${selectedWell.monthlyRevenue.toLocaleString()}
         </div>
         <div className="text-sm text-[hsl(var(--muted-foreground))]">
-          Monthly
+          Last month
         </div>
       </div>
     </div>
@@ -92,138 +129,48 @@ const WellLedger = () => {
 
   const QuickProofs = () => (
     <div className="bg-[hsl(var(--card))] p-4 rounded-lg border border-[hsl(var(--border))] mb-6">
-      <h3 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-3">
-        Quick Proofs
-      </h3>
-      <div className="flex flex-wrap gap-2">
-        {selectedWell.proofs.hcs.slice(0, 3).map((hcsId, index) => (
-          <ProofPill
-            key={hcsId}
-            type="HCS"
-            id={hcsId}
-            size="sm"
-            variant="success"
-            label={`Event ${index + 1}`}
-          />
-        ))}
-        {selectedWell.proofs.hts.slice(0, 2).map((htsId, index) => (
-          <ProofPill
-            key={htsId}
-            type="HTS"
-            id={htsId}
-            size="sm"
-            variant="default"
-            label={`Transfer ${index + 1}`}
-          />
-        ))}
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-semibold text-[hsl(var(--foreground))]">
+          Quick Proofs
+        </h3>
+        <div className="flex gap-2">
+          {selectedWell.proofs.hcs.slice(0, 2).map((id: string) => (
+            <ProofPill key={id} type="HCS" id={id} size="sm" />
+          ))}
+          {selectedWell.proofs.hts.slice(0, 1).map((id: string) => (
+            <ProofPill key={id} type="HTS" id={id} size="sm" />
+          ))}
+        </div>
+      </div>
+      <div className="text-xs text-[hsl(var(--muted-foreground))]">
+        Tap a proof to view on HashScan/Mirror Node
       </div>
     </div>
   );
 
   const OverviewTab = () => (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
-          <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
-            Well Information
-          </h4>
-          <div className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-[hsl(var(--muted-foreground))]">
-                Location:
-              </span>
-              <span className="font-medium">{selectedWell.location}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-[hsl(var(--muted-foreground))]">Type:</span>
-              <Badge
-                className={
-                  selectedWell.type === 'Cashflow'
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-blue-100 text-blue-800'
-                }
-              >
-                {selectedWell.type}
-              </Badge>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-[hsl(var(--muted-foreground))]">
-                Status:
-              </span>
-              <Badge
-                className={
-                  selectedWell.status === 'Active'
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-yellow-100 text-yellow-800'
-                }
-              >
-                {selectedWell.status}
-              </Badge>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-[hsl(var(--muted-foreground))]">
-                Device ID:
-              </span>
-              <span className="font-mono text-sm">{selectedWell.deviceId}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-[hsl(var(--muted-foreground))]">
-                Price per Liter:
-              </span>
-              <span className="font-medium">
-                ${selectedWell.pricePerLiter.toFixed(3)}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
-          <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
-            Blockchain Assets
-          </h4>
-          <div className="space-y-3">
-            <div className="flex justify-between items-center">
-              <span className="text-[hsl(var(--muted-foreground))]">
-                Well Passport NFT:
-              </span>
-              <ProofPill
-                type="HTS"
-                id={selectedWell.wellPassportNFT}
-                size="sm"
-                label="NFT"
-              />
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[hsl(var(--muted-foreground))]">
-                Operator Address:
-              </span>
-              <span className="font-mono text-sm">
-                {selectedWell.operatorAddress}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[hsl(var(--muted-foreground))]">
-                Escrow Address:
-              </span>
-              <span className="font-mono text-sm">
-                {selectedWell.escrowAddress}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Well Info */}
       <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
         <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
-          Maintenance Schedule
+          Well Information
         </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-3">
           <div className="flex items-center gap-3">
-            <CheckCircle className="h-5 w-5 text-green-500" />
+            <MapPin className="h-5 w-5 text-red-500" />
             <div>
-              <div className="font-medium">Last Maintenance</div>
+              <div className="font-medium">Location</div>
               <div className="text-sm text-[hsl(var(--muted-foreground))]">
-                {selectedWell.lastMaintenance}
+                {selectedWell.location}
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <FileText className="h-5 w-5 text-emerald-500" />
+            <div>
+              <div className="font-medium">NFT Passport</div>
+              <div className="text-sm text-[hsl(var(--muted-foreground))]">
+                Token ID: {selectedWell.nftPassport}
               </div>
             </div>
           </div>
@@ -238,43 +185,87 @@ const WellLedger = () => {
           </div>
         </div>
       </div>
+
+      {/* Blockchain Assets */}
+      <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
+        <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
+          Blockchain Assets
+        </h4>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="font-medium">Tariff Topic</div>
+              <div className="text-sm text-[hsl(var(--muted-foreground))]">
+                {selectedWell.proofs.hcs[0]}
+              </div>
+            </div>
+            <ProofPill type="HCS" id={selectedWell.proofs.hcs[0]} size="sm" />
+          </div>
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="font-medium">Settlement Token</div>
+              <div className="text-sm text-[hsl(var(--muted-foreground))]">
+                {selectedWell.proofs.hts[0]}
+              </div>
+            </div>
+            <ProofPill type="HTS" id={selectedWell.proofs.hts[0]} size="sm" />
+          </div>
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="font-medium">NFT Passport</div>
+              <div className="text-sm text-[hsl(var(--muted-foreground))]">
+                {selectedWell.nftPassport}
+              </div>
+            </div>
+            <Badge>ERC-721</Badge>
+          </div>
+        </div>
+      </div>
     </div>
   );
 
   const LiterTimelineTab = () => (
-    <div className="space-y-4">
-      <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
-        <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
-          Water Dispensing Timeline
-        </h4>
-        <div className="space-y-4">
-          {wellTransactions
-            .filter(tx => tx.type === 'withdrawal')
-            .map(tx => (
+    <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
+      <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
+        Water Dispensing Timeline
+      </h4>
+      <div className="space-y-4">
+        {wellTransactions
+          .filter(tx => tx.type === 'deposit' || tx.type === 'withdrawal')
+          .map(tx => (
+            <div
+              key={tx.id}
+              className="flex items-center gap-4 p-4 bg-[hsl(var(--muted))] rounded-lg"
+            >
               <div
-                key={tx.id}
-                className="flex items-center gap-4 p-4 bg-[hsl(var(--muted))] rounded-lg"
-              >
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                <div className="flex-1">
-                  <div className="font-medium">{tx.description}</div>
-                  <div className="text-sm text-[hsl(var(--muted-foreground))]">
-                    {new Date(tx.timestamp).toLocaleString()}
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="font-medium">${tx.amount}</div>
-                  <div className="text-sm text-[hsl(var(--muted-foreground))]">
-                    {(tx.amount / selectedWell.pricePerLiter).toFixed(1)}L
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  {tx.hcsId && <ProofPill type="HCS" id={tx.hcsId} size="sm" />}
-                  {tx.htsId && <ProofPill type="HTS" id={tx.htsId} size="sm" />}
+                className={`w-3 h-3 rounded-full ${
+                  tx.type === 'deposit' ? 'bg-blue-500' : 'bg-red-500'
+                }`}
+              ></div>
+              <div className="flex-1">
+                <div className="font-medium">{tx.description}</div>
+                <div className="text-sm text-[hsl(var(--muted-foreground))]">
+                  {new Date(tx.timestamp).toLocaleString()}
                 </div>
               </div>
-            ))}
-        </div>
+              <div className="text-right">
+                <div className="font-medium">{tx.liters} L</div>
+                <Badge
+                  className={
+                    tx.status === 'confirmed'
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-yellow-100 text-yellow-800'
+                  }
+                >
+                  {tx.status}
+                </Badge>
+              </div>
+              <div className="flex gap-2">
+                {tx.hcsId && <ProofPill type="HCS" id={tx.hcsId} size="sm" />}
+                {tx.htsId && <ProofPill type="HTS" id={tx.htsId} size="sm" />}
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );
@@ -330,122 +321,89 @@ const WellLedger = () => {
   );
 
   const ReconciliationTab = () => (
-    <div className="space-y-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
         <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
           Financial Reconciliation
         </h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="text-center p-4 bg-[hsl(var(--muted))] rounded-lg">
-            <div className="text-2xl font-bold text-green-600">
-              $
-              {wellTransactions
-                .filter(tx => tx.type === 'deposit')
-                .reduce((sum, tx) => sum + tx.amount, 0)
-                .toLocaleString()}
+        <div className="space-y-4">
+          <div className="flex items-center gap-4 p-4 bg-[hsl(var(--muted))] rounded-lg">
+            <CheckCircle className="h-5 w-5 text-green-500" />
+            <div className="flex-1">
+              <div className="font-medium">Last Settlement Matched</div>
+              <div className="text-sm text-[hsl(var(--muted-foreground))]">
+                All transactions reconciled successfully
+              </div>
             </div>
-            <div className="text-sm text-[hsl(var(--muted-foreground))]">
-              Total Deposits
-            </div>
+            <ProofPill type="HCS" id={selectedWell.proofs.hcs[1] || selectedWell.proofs.hcs[0]} size="sm" />
           </div>
-          <div className="text-center p-4 bg-[hsl(var(--muted))] rounded-lg">
-            <div className="text-2xl font-bold text-blue-600">
-              $
-              {wellTransactions
-                .filter(tx => tx.type === 'withdrawal')
-                .reduce((sum, tx) => sum + tx.amount, 0)
-                .toLocaleString()}
-            </div>
+
+          <div className="flex items-center justify-between">
             <div className="text-sm text-[hsl(var(--muted-foreground))]">
-              Total Withdrawals
+              Liter-to-Cash Ratio
             </div>
+            <div className="font-semibold">1 L = ${selectedWell.pricePerLiter.toFixed(3)}</div>
           </div>
-          <div className="text-center p-4 bg-[hsl(var(--muted))] rounded-lg">
-            <div className="text-2xl font-bold text-purple-600">
-              $
-              {wellTransactions
-                .filter(tx => tx.type === 'refund')
-                .reduce((sum, tx) => sum + tx.amount, 0)
-                .toLocaleString()}
-            </div>
+
+          <div className="flex items-center justify-between">
             <div className="text-sm text-[hsl(var(--muted-foreground))]">
-              Total Refunds
+              Outstanding Refunds
             </div>
+            <div className="font-semibold">0</div>
           </div>
         </div>
+      </div>
 
-        <div className="flex items-center gap-2 p-4 bg-green-50 rounded-lg">
-          <CheckCircle className="h-5 w-5 text-green-600" />
-          <span className="font-medium text-green-800">
-            All transactions reconciled
-          </span>
-          <ProofPill
-            type="HCS"
-            id="1706918400.reconciliation"
-            size="sm"
-            label="Reconciled"
-          />
+      <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
+        <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
+          Proof of Reconciliation
+        </h4>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-[hsl(var(--muted-foreground))]">
+              Ledger Snapshot (HCS)
+            </div>
+            <ProofPill type="HCS" id={selectedWell.proofs.hcs[2] || selectedWell.proofs.hcs[0]} size="sm" />
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-[hsl(var(--muted-foreground))]">
+              Settlement Batch (HTS)
+            </div>
+            <ProofPill type="HTS" id={selectedWell.proofs.hts[1] || selectedWell.proofs.hts[0]} size="sm" />
+          </div>
         </div>
       </div>
     </div>
   );
 
   const DocumentsTab = () => (
-    <div className="space-y-4">
-      <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
-        <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
-          Well Documentation
-        </h4>
-        <div className="space-y-3">
-          {[
-            {
-              name: 'Well Construction Certificate',
-              type: 'PDF',
-              size: '2.3 MB',
-              hcs: '1704067200.cert001',
-            },
-            {
-              name: 'Water Quality Report',
-              type: 'PDF',
-              size: '1.8 MB',
-              hcs: '1704153600.quality001',
-            },
-            {
-              name: 'Maintenance Log',
-              type: 'CSV',
-              size: '0.5 MB',
-              hcs: '1704240000.maint001',
-            },
-            {
-              name: 'Financial Audit',
-              type: 'PDF',
-              size: '3.1 MB',
-              hcs: '1704326400.audit001',
-            },
-          ].map((doc, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-4 p-4 bg-[hsl(var(--muted))] rounded-lg"
-            >
-              <FileText className="h-8 w-8 text-blue-500" />
-              <div className="flex-1">
-                <div className="font-medium">{doc.name}</div>
-                <div className="text-sm text-[hsl(var(--muted-foreground))]">
-                  {doc.type} • {doc.size}
-                </div>
+    <div className="bg-[hsl(var(--card))] p-6 rounded-lg border border-[hsl(var(--border))]">
+      <h4 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
+        Well Documentation
+      </h4>
+      <div className="space-y-4">
+        {selectedWell.documents.map((doc: any, idx: number) => (
+          <div
+            key={`${doc.name}-${idx}`}
+            className="flex items-center justify-between p-4 bg-[hsl(var(--muted))] rounded-lg"
+          >
+            <div>
+              <div className="font-medium">{doc.name}</div>
+              <div className="text-sm text-[hsl(var(--muted-foreground))]">
+                {doc.type} • {doc.size}
               </div>
-              <ProofPill type="HCS" id={doc.hcs} size="sm" />
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => toast.success(`Downloading ${doc.name} (mock)`)}
-              >
-                <Download className="h-4 w-4 mr-2" />
-                Download
-              </Button>
             </div>
-          ))}
-        </div>
+            <ProofPill type="HCS" id={doc.hcs} size="sm" />
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => toast.success(`Downloading ${doc.name} (mock)`)}
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Download
+            </Button>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -466,7 +424,7 @@ const WellLedger = () => {
         <div className="flex gap-2">
           <select
             value={selectedWellId}
-            onChange={e => setSelectedWellId(e.target.value)}
+            onChange={e => handleWellChange(e.target.value)}
             className="px-3 py-2 border border-[hsl(var(--border))] rounded-md bg-[hsl(var(--background))]"
           >
             {mockWells.map(well => (
@@ -487,7 +445,7 @@ const WellLedger = () => {
       {/* Internal Tabs */}
       <Tabs
         value={activeSubTab}
-        onValueChange={setActiveSubTab}
+        onValueChange={handleTabChange}
         className="w-full"
       >
         <TabsList className="grid w-full grid-cols-5">

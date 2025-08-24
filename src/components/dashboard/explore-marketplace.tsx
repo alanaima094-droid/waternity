@@ -16,10 +16,11 @@ import {
   Drill,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
-const ExploreMarketplace = () => {
+const ExploreMarketplace = ({ initialType = 'Cashflow' as 'Cashflow' | 'Impact' }: { initialType?: 'Cashflow' | 'Impact' }) => {
   const [activeFilter, setActiveFilter] = useState<'Cashflow' | 'Impact'>(
-    'Cashflow'
+    initialType
   );
   const wells = getWellsByType(activeFilter);
   const stats = getTotalStats();
@@ -120,14 +121,11 @@ const ExploreMarketplace = () => {
                 <CreditCard className="h-4 w-4 mr-2" />
                 Subscribe
               </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                className="flex-1"
-                onClick={() => toast.message('Opening details (mock)')}
-              >
-                <Eye className="h-4 w-4 mr-2" />
-                View Details
+              <Button size="sm" variant="outline" className="flex-1" asChild>
+                <Link href={`/ledger?id=${encodeURIComponent(well.id)}`}>
+                  <Eye className="h-4 w-4 mr-2" />
+                  View Details
+                </Link>
               </Button>
             </>
           ) : (
@@ -140,14 +138,11 @@ const ExploreMarketplace = () => {
                 <Drill className="h-4 w-4 mr-2" />
                 Fund Drilling
               </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                className="flex-1"
-                onClick={() => toast.message('Opening impact details (mock)')}
-              >
-                <Eye className="h-4 w-4 mr-2" />
-                View Impact
+              <Button size="sm" variant="outline" className="flex-1" asChild>
+                <Link href={`/ledger?id=${encodeURIComponent(well.id)}`}>
+                  <Eye className="h-4 w-4 mr-2" />
+                  View Impact
+                </Link>
               </Button>
             </>
           )}
