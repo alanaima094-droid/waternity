@@ -36,3 +36,10 @@
 # Ensure CRLF for Windows scripts
 *.bat eol=crlf
 *.cmd eol=crlf
+# Force all text files to use LF in repo
+* text=auto eol=lf
+
+# Specific overrides (opsional)
+*.bat   text eol=crlf
+*.ps1   text eol=crlf
+*.sh    text eol=lf
