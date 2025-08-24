@@ -1,6 +1,6 @@
 'use client';
 
-import { TrendingUp, Globe, DollarSign, Target } from 'lucide-react';
+import { TrendingUp, Globe, DollarSign } from 'lucide-react';
 
 const askItems = [
   {
@@ -32,8 +32,8 @@ export function AskSection() {
             The Ask
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Join us in revolutionizing water access with blockchain transparency. 
-            Together, we can unlock $803M/yr revenue potential.
+            Join us in revolutionizing water access with blockchain
+            transparency. Together, we can unlock $803M/yr revenue potential.
           </p>
         </div>
 
@@ -52,9 +52,7 @@ export function AskSection() {
               <h3 className="text-xl font-bold text-slate-900 mb-3">
                 {item.title}
               </h3>
-              <p className="text-slate-600">
-                {item.desc}
-              </p>
+              <p className="text-slate-600">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -66,8 +64,8 @@ export function AskSection() {
               Ready to Transform Water Access?
             </h3>
             <p className="text-blue-100 mb-8 text-lg">
-              Partner dengan kami untuk membuka potensi $803M/yr revenue 
-              dan memberikan akses air bersih untuk 400M orang di Sub-Sahara Africa.
+              Partner dengan kami untuk membuka potensi $803M/yr revenue dan
+              memberikan akses air bersih untuk 400M orang di Sub-Sahara Africa.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-colors">

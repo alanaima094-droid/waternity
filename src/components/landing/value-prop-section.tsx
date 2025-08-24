@@ -34,13 +34,17 @@ export function ValuePropSection() {
             Value Proposition
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Waternity menyatukan hasil finansial, dampak nyata, dan transparansi level-audit.
+            Waternity menyatukan hasil finansial, dampak nyata, dan transparansi
+            level-audit.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((v, i) => (
-            <div key={i} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+            <div
+              key={i}
+              className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"
+            >
               <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
                 {v.icon}
               </div>

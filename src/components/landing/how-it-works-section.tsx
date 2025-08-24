@@ -1,6 +1,13 @@
 'use client';
 
-import { Wallet, Gauge, Settings, ArrowRightLeft, FileCheck, ArrowRight } from 'lucide-react';
+import {
+  Wallet,
+  Gauge,
+  Settings,
+  ArrowRightLeft,
+  FileCheck,
+  ArrowRight,
+} from 'lucide-react';
 
 const steps = [
   {
@@ -49,8 +56,9 @@ export function HowItWorksSection() {
             How It Works
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            5 langkah sederhana dengan Hedera blockchain untuk transparansi penuh 
-            dari deposit hingga audit. Setiap aksi = proof yang dapat diverifikasi.
+            5 langkah sederhana dengan Hedera blockchain untuk transparansi
+            penuh dari deposit hingga audit. Setiap aksi = proof yang dapat
+            diverifikasi.
           </p>
         </div>
 
@@ -87,7 +95,10 @@ export function HowItWorksSection() {
         {/* Mobile Flow */}
         <div className="lg:hidden space-y-8">
           {steps.map((step, index) => (
-            <div key={index} className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
+            <div
+              key={index}
+              className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100"
+            >
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center flex-shrink-0">
                   {step.icon}
@@ -99,9 +110,7 @@ export function HowItWorksSection() {
                   <h3 className="text-xl font-semibold text-slate-900 mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-slate-600 mb-3">
-                    {step.desc}
-                  </p>
+                  <p className="text-slate-600 mb-3">{step.desc}</p>
                   <div className="text-xs text-blue-500 font-medium bg-blue-50 px-3 py-1 rounded-full inline-block">
                     {step.tech}
                   </div>
@@ -118,21 +127,21 @@ export function HowItWorksSection() {
               Every Action = Hedera Proof
             </h3>
             <p className="text-slate-600 mb-6 max-w-2xl mx-auto">
-              Semua transaksi tercatat di Hedera ledger dan dapat diverifikasi publik. 
-              Klik link HashScan untuk audit real-time.
+              Semua transaksi tercatat di Hedera ledger dan dapat diverifikasi
+              publik. Klik link HashScan untuk audit real-time.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="https://hashscan.io" 
-                target="_blank" 
+              <a
+                href="https://hashscan.io"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="bg-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-700 transition-colors"
               >
                 View on HashScan
               </a>
-              <a 
-                href="https://mainnet.mirrornode.hedera.com" 
-                target="_blank" 
+              <a
+                href="https://mainnet.mirrornode.hedera.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-colors"
               >

@@ -145,7 +145,10 @@ export function ProofStrip() {
   }, [isPaused]);
 
   return (
-    <section id="live-proofs" className="py-16 bg-slate-900 text-white overflow-hidden">
+    <section
+      id="live-proofs"
+      className="py-16 bg-slate-900 text-white overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">

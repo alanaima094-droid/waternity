@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { Droplets, Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -29,12 +30,12 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <a
+            <Link
               href="/"
               className="text-gray-700 hover:text-waternity-primary transition-colors font-medium"
             >
               Home
-            </a>
+            </Link>
 
             {/* Platform Dropdown */}
             <DropdownMenu>
@@ -44,29 +45,29 @@ export function Navigation() {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>
-                  <a href="/dashboard" className="w-full">
+                  <Link href="/dashboard" className="w-full">
                     Dashboard
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <a href="#how-it-works" className="w-full">
+                  <Link href="#how-it-works" className="w-full">
                     How It Works
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <a href="/dashboard#explore" className="w-full">
+                  <Link href="/dashboard#explore" className="w-full">
                     Invest in Wells
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <a href="/dashboard#investor" className="w-full">
+                  <Link href="/dashboard#investor" className="w-full">
                     Track Performance
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <a href="/dashboard#audit" className="w-full">
+                  <Link href="/dashboard#audit" className="w-full">
                     Analytics & Audit
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -79,24 +80,24 @@ export function Navigation() {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>
-                  <a href="/docs" className="w-full">
+                  <Link href="/docs" className="w-full">
                     Documentation
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <a href="/api" className="w-full">
+                  <Link href="/api" className="w-full">
                     API Reference
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <a href="/whitepaper" className="w-full">
+                  <Link href="/whitepaper" className="w-full">
                     Whitepaper
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <a href="/support" className="w-full">
+                  <Link href="/support" className="w-full">
                     Support
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -120,7 +121,10 @@ export function Navigation() {
             <Button variant="ghost" className="text-gray-700" asChild>
               <a href="/dashboard#user">Sign In</a>
             </Button>
-            <Button className="bg-waternity-primary hover:bg-waternity-primary/90" asChild>
+            <Button
+              className="bg-waternity-primary hover:bg-waternity-primary/90"
+              asChild
+            >
               <a href="/dashboard">Get Started</a>
             </Button>
           </div>
@@ -143,47 +147,47 @@ export function Navigation() {
         {isOpen && (
           <div className="md:hidden py-4 border-t border-slate-200">
             <div className="flex flex-col gap-4">
-              <a
+              <Link
                 href="/"
                 className="text-gray-700 hover:text-waternity-primary transition-colors font-medium py-2"
               >
                 Home
-              </a>
+              </Link>
 
               {/* Mobile Platform Section */}
               <div>
                 <div className="text-gray-900 font-medium py-2">Platform</div>
                 <div className="pl-4 flex flex-col gap-2">
-                  <a
+                  <Link
                     href="/dashboard"
                     className="text-gray-600 hover:text-waternity-primary transition-colors py-1"
                   >
                     Dashboard
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#how-it-works"
                     className="text-gray-600 hover:text-waternity-primary transition-colors py-1"
                   >
                     How It Works
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/dashboard#explore"
                     className="text-gray-600 hover:text-waternity-primary transition-colors py-1"
                   >
                     Invest in Wells
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/dashboard#investor"
                     className="text-gray-600 hover:text-waternity-primary transition-colors py-1"
                   >
                     Track Performance
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/dashboard#audit"
                     className="text-gray-600 hover:text-waternity-primary transition-colors py-1"
                   >
                     Analytics & Audit
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -191,53 +195,60 @@ export function Navigation() {
               <div>
                 <div className="text-gray-900 font-medium py-2">Resources</div>
                 <div className="pl-4 flex flex-col gap-2">
-                  <a
+                  <Link
                     href="/docs"
                     className="text-gray-600 hover:text-waternity-primary transition-colors py-1"
                   >
                     Documentation
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/api"
                     className="text-gray-600 hover:text-waternity-primary transition-colors py-1"
                   >
                     API Reference
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/whitepaper"
                     className="text-gray-600 hover:text-waternity-primary transition-colors py-1"
                   >
                     Whitepaper
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/support"
                     className="text-gray-600 hover:text-waternity-primary transition-colors py-1"
                   >
                     Support
-                  </a>
+                  </Link>
                 </div>
               </div>
 
-              <a
+              <Link
                 href="#about"
                 className="text-gray-700 hover:text-waternity-primary transition-colors font-medium py-2"
               >
                 About
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#contact"
                 className="text-gray-700 hover:text-waternity-primary transition-colors font-medium py-2"
               >
                 Contact
-              </a>
+              </Link>
 
               {/* Mobile CTA */}
               <div className="flex flex-col gap-3 pt-4 border-t border-slate-200">
-                <Button variant="ghost" className="text-gray-700 justify-start" asChild>
-                  <a href="/dashboard#user">Sign In</a>
+                <Button
+                  variant="ghost"
+                  className="text-gray-700 justify-start"
+                  asChild
+                >
+                  <Link href="/dashboard#user">Sign In</Link>
                 </Button>
-                <Button className="bg-waternity-primary hover:bg-waternity-primary/90 justify-start" asChild>
-                  <a href="/dashboard">Get Started</a>
+                <Button
+                  className="bg-waternity-primary hover:bg-waternity-primary/90 justify-start"
+                  asChild
+                >
+                  <Link href="/dashboard">Get Started</Link>
                 </Button>
               </div>
             </div>

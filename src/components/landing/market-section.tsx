@@ -1,6 +1,6 @@
 'use client';
 
-import { Globe2, BarChart3, Landmark } from 'lucide-react';
+import { Globe2, BarChart3 } from 'lucide-react';
 
 const marketItems = [
   {
@@ -32,14 +32,20 @@ export function MarketSection() {
             Massive, Under-Served Market
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Air adalah aset paling vital. Kebutuhan infrastruktur dan efisiensi menciptakan peluang pertumbuhan yang sangat besar.
+            Air adalah aset paling vital. Kebutuhan infrastruktur dan efisiensi
+            menciptakan peluang pertumbuhan yang sangat besar.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-16">
           {marketItems.map((m, i) => (
-            <div key={i} className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100 text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">{m.value}</div>
+            <div
+              key={i}
+              className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100 text-center"
+            >
+              <div className="text-4xl font-bold text-blue-600 mb-2">
+                {m.value}
+              </div>
               <div className="font-semibold text-slate-900 mb-2">{m.title}</div>
               <p className="text-slate-600">{m.desc}</p>
             </div>
@@ -51,9 +57,18 @@ export function MarketSection() {
             <BarChart3 className="h-6 w-6 text-blue-600" /> Go-to-Market
           </h3>
           <ul className="grid md:grid-cols-3 gap-4 text-slate-700">
-            <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3" /> Kemitraan operator air di Afrika dan Asia</li>
-            <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3" /> Program investor institusi: impact dan frontier markets</li>
-            <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3" /> Distribusi retail terkurasi via wallet & exchange</li>
+            <li className="flex items-start">
+              <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3" />{' '}
+              Kemitraan operator air di Afrika dan Asia
+            </li>
+            <li className="flex items-start">
+              <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3" />{' '}
+              Program investor institusi: impact dan frontier markets
+            </li>
+            <li className="flex items-start">
+              <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3" />{' '}
+              Distribusi retail terkurasi via wallet & exchange
+            </li>
           </ul>
         </div>
       </div>

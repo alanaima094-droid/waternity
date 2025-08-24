@@ -1,35 +1,40 @@
-"use client"
+'use client';
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import ProofPill from '@/components/ui/proof-pill';
-import { mockWells, getWellsByType, getTotalStats } from '@/lib/mock-data';
-import { 
-  TrendingUp, 
-  MapPin, 
-  Users, 
-  Droplets, 
+import { getWellsByType, getTotalStats } from '@/lib/mock-data';
+import {
+  TrendingUp,
+  MapPin,
+  Users,
   DollarSign,
   Activity,
   Eye,
   CreditCard,
-  Drill
+  Drill,
 } from 'lucide-react';
-import { toast } from 'sonner'
+import { toast } from 'sonner';
 
 const ExploreMarketplace = () => {
-  const [activeFilter, setActiveFilter] = useState<'Cashflow' | 'Impact'>('Cashflow');
+  const [activeFilter, setActiveFilter] = useState<'Cashflow' | 'Impact'>(
+    'Cashflow'
+  );
   const wells = getWellsByType(activeFilter);
   const stats = getTotalStats();
 
   const ProjectCard = ({ well }: { well: any }) => {
     const getStatusColor = (status: string) => {
       switch (status) {
-        case 'Active': return 'bg-green-100 text-green-800';
-        case 'Pending': return 'bg-yellow-100 text-yellow-800';
-        case 'Maintenance': return 'bg-orange-100 text-orange-800';
-        default: return 'bg-gray-100 text-gray-800';
+        case 'Active':
+          return 'bg-green-100 text-green-800';
+        case 'Pending':
+          return 'bg-yellow-100 text-yellow-800';
+        case 'Maintenance':
+          return 'bg-orange-100 text-orange-800';
+        default:
+          return 'bg-gray-100 text-gray-800';
       }
     };
 
@@ -46,16 +51,16 @@ const ExploreMarketplace = () => {
               <span>{well.location}</span>
             </div>
           </div>
-          <Badge className={getStatusColor(well.status)}>
-            {well.status}
-          </Badge>
+          <Badge className={getStatusColor(well.status)}>{well.status}</Badge>
         </div>
 
         {/* KPIs */}
         <div className="grid grid-cols-3 gap-4 mb-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-[hsl(var(--foreground))]">
-              {well.type === 'Cashflow' ? `${well.apr}%` : `${well.peopleServed.toLocaleString()}`}
+              {well.type === 'Cashflow'
+                ? `${well.apr}%`
+                : `${well.peopleServed.toLocaleString()}`}
             </div>
             <div className="text-xs text-[hsl(var(--muted-foreground))]">
               {well.type === 'Cashflow' ? 'APR' : 'People Served'}
@@ -82,20 +87,20 @@ const ExploreMarketplace = () => {
         {/* Proof Pills */}
         <div className="flex flex-wrap gap-2 mb-4">
           {well.proofs.hcs.slice(0, 2).map((hcsId: string, index: number) => (
-            <ProofPill 
+            <ProofPill
               key={hcsId}
-              type="HCS" 
-              id={hcsId} 
-              size="sm" 
+              type="HCS"
+              id={hcsId}
+              size="sm"
               variant="success"
             />
           ))}
           {well.proofs.hts.slice(0, 1).map((htsId: string, index: number) => (
-            <ProofPill 
+            <ProofPill
               key={htsId}
-              type="HTS" 
-              id={htsId} 
-              size="sm" 
+              type="HTS"
+              id={htsId}
+              size="sm"
               variant="default"
             />
           ))}
@@ -105,22 +110,42 @@ const ExploreMarketplace = () => {
         <div className="flex gap-2">
           {well.type === 'Cashflow' ? (
             <>
-              <Button size="sm" className="flex-1" onClick={() => toast.success('Subscription request submitted (mock)')}>
+              <Button
+                size="sm"
+                className="flex-1"
+                onClick={() =>
+                  toast.success('Subscription request submitted (mock)')
+                }
+              >
                 <CreditCard className="h-4 w-4 mr-2" />
                 Subscribe
               </Button>
-              <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.message('Opening details (mock)')}>
+              <Button
+                size="sm"
+                variant="outline"
+                className="flex-1"
+                onClick={() => toast.message('Opening details (mock)')}
+              >
                 <Eye className="h-4 w-4 mr-2" />
                 View Details
               </Button>
             </>
           ) : (
             <>
-              <Button size="sm" className="flex-1" onClick={() => toast.success('Funding pledge submitted (mock)')}>
+              <Button
+                size="sm"
+                className="flex-1"
+                onClick={() => toast.success('Funding pledge submitted (mock)')}
+              >
                 <Drill className="h-4 w-4 mr-2" />
                 Fund Drilling
               </Button>
-              <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.message('Opening impact details (mock)')}>
+              <Button
+                size="sm"
+                variant="outline"
+                className="flex-1"
+                onClick={() => toast.message('Opening impact details (mock)')}
+              >
                 <Eye className="h-4 w-4 mr-2" />
                 View Impact
               </Button>
@@ -179,7 +204,7 @@ const ExploreMarketplace = () => {
             of {stats.totalWells} total
           </div>
         </div>
-        
+
         <div className="bg-[hsl(var(--card))] p-4 rounded-lg border border-[hsl(var(--border))]">
           <div className="flex items-center gap-2 mb-2">
             <Users className="h-5 w-5 text-green-500" />
@@ -192,7 +217,7 @@ const ExploreMarketplace = () => {
             across all wells
           </div>
         </div>
-        
+
         <div className="bg-[hsl(var(--card))] p-4 rounded-lg border border-[hsl(var(--border))]">
           <div className="flex items-center gap-2 mb-2">
             <DollarSign className="h-5 w-5 text-purple-500" />
@@ -205,14 +230,16 @@ const ExploreMarketplace = () => {
             from active wells
           </div>
         </div>
-        
+
         <div className="bg-[hsl(var(--card))] p-4 rounded-lg border border-[hsl(var(--border))]">
           <div className="flex items-center gap-2 mb-2">
             <TrendingUp className="h-5 w-5 text-orange-500" />
             <span className="font-semibold">Avg Performance</span>
           </div>
           <div className="text-2xl font-bold text-[hsl(var(--foreground))]">
-            {activeFilter === 'Cashflow' ? `${stats.averageAPR.toFixed(1)}%` : `${stats.averageUptime.toFixed(1)}%`}
+            {activeFilter === 'Cashflow'
+              ? `${stats.averageAPR.toFixed(1)}%`
+              : `${stats.averageUptime.toFixed(1)}%`}
           </div>
           <div className="text-sm text-[hsl(var(--muted-foreground))]">
             {activeFilter === 'Cashflow' ? 'APR' : 'Uptime'}
@@ -222,7 +249,7 @@ const ExploreMarketplace = () => {
 
       {/* Wells Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {wells.map((well) => (
+        {wells.map(well => (
           <ProjectCard key={well.id} well={well} />
         ))}
       </div>

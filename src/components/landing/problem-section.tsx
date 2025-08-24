@@ -1,6 +1,6 @@
 'use client';
 
-import { AlertTriangle, Clock, Gauge, DollarSign, TrendingDown, X } from 'lucide-react';
+import { AlertTriangle, DollarSign, TrendingDown, X } from 'lucide-react';
 
 interface ProblemStat {
   icon: React.ReactNode;
@@ -37,22 +37,26 @@ const problemStats: ProblemStat[] = [
 const painPoints = [
   {
     title: 'Massive Investment Gap',
-    description: 'Traditional funding mechanisms fail to scale water infrastructure projects globally',
+    description:
+      'Traditional funding mechanisms fail to scale water infrastructure projects globally',
     impact: '$114B annual funding shortfall',
   },
   {
     title: 'Lack of Transparency',
-    description: 'Investors cannot track impact or ensure funds reach intended communities',
+    description:
+      'Investors cannot track impact or ensure funds reach intended communities',
     impact: '85% of donors want proof of impact',
   },
   {
     title: 'Inefficient Operations',
-    description: 'Existing water projects lack real-time monitoring and optimization',
+    description:
+      'Existing water projects lack real-time monitoring and optimization',
     impact: '40% operational efficiency loss',
   },
   {
     title: 'Limited Scalability',
-    description: 'Current models cannot expand quickly enough to meet urgent global needs',
+    description:
+      'Current models cannot expand quickly enough to meet urgent global needs',
     impact: '2030 SDG targets at risk',
   },
 ];
@@ -74,8 +78,9 @@ export function ProblemSection() {
             </span>
           </h2>
           <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
-            While 2 billion people lack access to safe water, traditional funding mechanisms are failing. 
-            The water sector needs a new investment model that delivers both impact and returns.
+            While 2 billion people lack access to safe water, traditional
+            funding mechanisms are failing. The water sector needs a new
+            investment model that delivers both impact and returns.
           </p>
         </div>
 
@@ -86,26 +91,28 @@ export function ProblemSection() {
               key={index}
               className="bg-white rounded-2xl p-8 shadow-lg border border-red-100 hover:shadow-xl transition-all duration-300"
             >
-              <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 ${
-                stat.trend === 'negative' 
-                  ? 'bg-red-100 text-red-600' 
-                  : 'bg-orange-100 text-orange-600'
-              }`}>
+              <div
+                className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 ${
+                  stat.trend === 'negative'
+                    ? 'bg-red-100 text-red-600'
+                    : 'bg-orange-100 text-orange-600'
+                }`}
+              >
                 {stat.icon}
               </div>
-              
-              <div className={`text-4xl font-bold mb-2 ${
-                stat.trend === 'negative' 
-                  ? 'text-red-600' 
-                  : 'text-orange-600'
-              }`}>
+
+              <div
+                className={`text-4xl font-bold mb-2 ${
+                  stat.trend === 'negative' ? 'text-red-600' : 'text-orange-600'
+                }`}
+              >
                 {stat.value}
               </div>
-              
+
               <h3 className="text-lg font-semibold text-slate-900 mb-3">
                 {stat.label}
               </h3>
-              
+
               <p className="text-slate-600 text-sm leading-relaxed">
                 {stat.description}
               </p>
@@ -120,8 +127,9 @@ export function ProblemSection() {
               Why Traditional Funding Fails
             </h3>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              The water crisis persists because current investment models are fundamentally broken. 
-              Here's what investors and communities face today.
+              The water crisis persists because current investment models are
+              fundamentally broken. Here&apos;s what investors and communities
+              face today.
             </p>
           </div>
 
@@ -159,8 +167,9 @@ export function ProblemSection() {
               The Time for Change is Now
             </h3>
             <p className="text-red-100 mb-6 max-w-2xl mx-auto">
-              Every day of delay means more communities without water and more missed opportunities for investors. 
-              We need a new model that works for everyone.
+              Every day of delay means more communities without water and more
+              missed opportunities for investors. We need a new model that works
+              for everyone.
             </p>
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-medium">
               <TrendingDown className="h-5 w-5" />

@@ -92,27 +92,42 @@ export function Footer() {
               <h4 className="font-semibold mb-4">Platform</h4>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>
-                  <a href="/dashboard" className="hover:text-white transition-colors">
+                  <a
+                    href="/dashboard"
+                    className="hover:text-white transition-colors"
+                  >
                     Dashboard
                   </a>
                 </li>
                 <li>
-                  <a href="/dashboard#explore" className="hover:text-white transition-colors">
+                  <a
+                    href="/dashboard#explore"
+                    className="hover:text-white transition-colors"
+                  >
                     Invest in Wells
                   </a>
                 </li>
                 <li>
-                  <a href="/dashboard#investor" className="hover:text-white transition-colors">
+                  <a
+                    href="/dashboard#investor"
+                    className="hover:text-white transition-colors"
+                  >
                     Track Performance
                   </a>
                 </li>
                 <li>
-                  <a href="/dashboard#audit" className="hover:text-white transition-colors">
+                  <a
+                    href="/dashboard#audit"
+                    className="hover:text-white transition-colors"
+                  >
                     Analytics
                   </a>
                 </li>
                 <li>
-                  <a href="/dashboard#audit" className="hover:text-white transition-colors">
+                  <a
+                    href="/dashboard#audit"
+                    className="hover:text-white transition-colors"
+                  >
                     Audit Trail
                   </a>
                 </li>
@@ -124,27 +139,42 @@ export function Footer() {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>
-                  <a href="#about" className="hover:text-white transition-colors">
+                  <a
+                    href="#about"
+                    className="hover:text-white transition-colors"
+                  >
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="#team" className="hover:text-white transition-colors">
+                  <a
+                    href="#team"
+                    className="hover:text-white transition-colors"
+                  >
                     Our Team
                   </a>
                 </li>
                 <li>
-                  <a href="/careers" className="hover:text-white transition-colors">
+                  <a
+                    href="/careers"
+                    className="hover:text-white transition-colors"
+                  >
                     Careers
                   </a>
                 </li>
                 <li>
-                  <a href="#contact" className="hover:text-white transition-colors">
+                  <a
+                    href="#contact"
+                    className="hover:text-white transition-colors"
+                  >
                     Contact
                   </a>
                 </li>
                 <li>
-                  <a href="/press" className="hover:text-white transition-colors">
+                  <a
+                    href="/press"
+                    className="hover:text-white transition-colors"
+                  >
                     Press Kit
                   </a>
                 </li>
@@ -156,7 +186,10 @@ export function Footer() {
               <h4 className="font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>
-                  <a href="/docs" className="hover:text-white transition-colors">
+                  <a
+                    href="/docs"
+                    className="hover:text-white transition-colors"
+                  >
                     Documentation
                   </a>
                 </li>
@@ -166,17 +199,26 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="/support" className="hover:text-white transition-colors">
+                  <a
+                    href="/support"
+                    className="hover:text-white transition-colors"
+                  >
                     Support Center
                   </a>
                 </li>
                 <li>
-                  <a href="/blog" className="hover:text-white transition-colors">
+                  <a
+                    href="/blog"
+                    className="hover:text-white transition-colors"
+                  >
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="/whitepaper" className="hover:text-white transition-colors">
+                  <a
+                    href="/whitepaper"
+                    className="hover:text-white transition-colors"
+                  >
                     Whitepaper
                   </a>
                 </li>
@@ -193,13 +235,19 @@ export function Footer() {
                 </p>
               </div>
               <div className="flex gap-6 text-sm text-gray-400">
-                <a href="/privacy" className="hover:text-white transition-colors">
+                <a
+                  href="/privacy"
+                  className="hover:text-white transition-colors"
+                >
                   Privacy Policy
                 </a>
                 <a href="/terms" className="hover:text-white transition-colors">
                   Terms of Service
                 </a>
-                <a href="/cookies" className="hover:text-white transition-colors">
+                <a
+                  href="/cookies"
+                  className="hover:text-white transition-colors"
+                >
                   Cookie Policy
                 </a>
               </div>

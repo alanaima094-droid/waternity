@@ -137,7 +137,10 @@ export function HowItWorks() {
               impact on global water sustainability while earning competitive
               returns.
             </p>
-            <a href="/dashboard" className="inline-block bg-white text-blue-600 px-8 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-colors duration-200">
+            <a
+              href="/dashboard"
+              className="inline-block bg-white text-blue-600 px-8 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-colors duration-200"
+            >
               Get Started Today
             </a>
           </div>

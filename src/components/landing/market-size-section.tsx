@@ -46,26 +46,34 @@ export function MarketSizeSection() {
             </span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Revenue potential yang dapat diskalakan dari 10k hingga 1M kios dengan model bisnis yang terbukti.
+            Revenue potential yang dapat diskalakan dari 10k hingga 1M kios
+            dengan model bisnis yang terbukti.
           </p>
         </div>
 
         {/* Market Size Table */}
         <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden mb-12">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-6">
-            <h3 className="text-2xl font-bold text-white">Revenue Projection by Scale</h3>
+            <h3 className="text-2xl font-bold text-white">
+              Revenue Projection by Scale
+            </h3>
           </div>
-          
+
           <div className="divide-y divide-slate-200">
             {marketTiers.map((tier, index) => (
-              <div key={index} className="px-8 py-6 hover:bg-slate-50 transition-colors">
+              <div
+                key={index}
+                className="px-8 py-6 hover:bg-slate-50 transition-colors"
+              >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
                       {tier.icon}
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold text-slate-900">{tier.kios}</h4>
+                      <h4 className="text-xl font-bold text-slate-900">
+                        {tier.kios}
+                      </h4>
                       <p className="text-slate-600">{tier.description}</p>
                     </div>
                   </div>
@@ -77,7 +85,7 @@ export function MarketSizeSection() {
                 </div>
               </div>
             ))}
-            
+
             {/* Infrastructure Gap */}
             <div className="px-8 py-6 bg-gradient-to-r from-orange-50 to-red-50">
               <div className="flex items-center justify-between">
@@ -86,8 +94,12 @@ export function MarketSizeSection() {
                     <Globe className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-slate-900">Infra Gap (New Wells)</h4>
-                    <p className="text-slate-600">Global infrastructure funding requirement</p>
+                    <h4 className="text-xl font-bold text-slate-900">
+                      Infra Gap (New Wells)
+                    </h4>
+                    <p className="text-slate-600">
+                      Global infrastructure funding requirement
+                    </p>
                   </div>
                 </div>
                 <div className="text-right">
@@ -106,29 +118,38 @@ export function MarketSizeSection() {
             <div className="w-14 h-14 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6">
               <Target className="h-7 w-7" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">Scalable Model</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-3">
+              Scalable Model
+            </h3>
             <p className="text-slate-600">
-              Revenue model yang dapat diskalakan dari regional hingga global dengan infrastruktur yang sama.
+              Revenue model yang dapat diskalakan dari regional hingga global
+              dengan infrastruktur yang sama.
             </p>
           </div>
-          
+
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
             <div className="w-14 h-14 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6">
               <TrendingUp className="h-7 w-7" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">Growth Potential</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-3">
+              Growth Potential
+            </h3>
             <p className="text-slate-600">
-              Dari $80M hingga $8B revenue potential dengan ekspansi geografis dan peningkatan adoption.
+              Dari $80M hingga $8B revenue potential dengan ekspansi geografis
+              dan peningkatan adoption.
             </p>
           </div>
-          
+
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
             <div className="w-14 h-14 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-6">
               <Globe className="h-7 w-7" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">Global Impact</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-3">
+              Global Impact
+            </h3>
             <p className="text-slate-600">
-              Addressing $131-140B annual funding gap untuk SDG6 water infrastructure globally.
+              Addressing $131-140B annual funding gap untuk SDG6 water
+              infrastructure globally.
             </p>
           </div>
         </div>

@@ -30,7 +30,13 @@ export interface Well {
 export interface Transaction {
   id: string;
   wellId: string;
-  type: 'deposit' | 'withdrawal' | 'settlement' | 'refund' | 'maintenance' | 'tariff_update';
+  type:
+    | 'deposit'
+    | 'withdrawal'
+    | 'settlement'
+    | 'refund'
+    | 'maintenance'
+    | 'tariff_update';
   amount: number;
   timestamp: string;
   htsId?: string;
@@ -63,9 +69,17 @@ export const mockWells: Well[] = [
     nextMaintenance: '2024-04-15',
     coordinates: { lat: -6.9175, lng: 107.6191 },
     proofs: {
-      hcs: ['1704067200.123456789', '1704153600.234567890', '1704240000.345678901'],
-      hts: ['0.0.987654-1704067200-1', '0.0.987654-1704153600-2', '0.0.987654-1704240000-3']
-    }
+      hcs: [
+        '1704067200.123456789',
+        '1704153600.234567890',
+        '1704240000.345678901',
+      ],
+      hts: [
+        '0.0.987654-1704067200-1',
+        '0.0.987654-1704153600-2',
+        '0.0.987654-1704240000-3',
+      ],
+    },
   },
   {
     id: 'well-002',
@@ -89,9 +103,17 @@ export const mockWells: Well[] = [
     nextMaintenance: '2024-04-20',
     coordinates: { lat: -6.2615, lng: 106.8106 },
     proofs: {
-      hcs: ['1704326400.456789012', '1704412800.567890123', '1704499200.678901234'],
-      hts: ['0.0.987655-1704326400-1', '0.0.987655-1704412800-2', '0.0.987655-1704499200-3']
-    }
+      hcs: [
+        '1704326400.456789012',
+        '1704412800.567890123',
+        '1704499200.678901234',
+      ],
+      hts: [
+        '0.0.987655-1704326400-1',
+        '0.0.987655-1704412800-2',
+        '0.0.987655-1704499200-3',
+      ],
+    },
   },
   {
     id: 'well-003',
@@ -115,9 +137,17 @@ export const mockWells: Well[] = [
     nextMaintenance: '2024-04-10',
     coordinates: { lat: -7.2575, lng: 112.7521 },
     proofs: {
-      hcs: ['1703980800.789012345', '1704067200.890123456', '1704153600.901234567'],
-      hts: ['0.0.987656-1703980800-1', '0.0.987656-1704067200-2', '0.0.987656-1704153600-3']
-    }
+      hcs: [
+        '1703980800.789012345',
+        '1704067200.890123456',
+        '1704153600.901234567',
+      ],
+      hts: [
+        '0.0.987656-1703980800-1',
+        '0.0.987656-1704067200-2',
+        '0.0.987656-1704153600-3',
+      ],
+    },
   },
   {
     id: 'well-004',
@@ -141,9 +171,17 @@ export const mockWells: Well[] = [
     nextMaintenance: '2024-02-15',
     coordinates: { lat: 3.5952, lng: 98.6722 },
     proofs: {
-      hcs: ['1706745600.012345678', '1706832000.123456789', '1706918400.234567890'],
-      hts: ['0.0.987657-1706745600-1', '0.0.987657-1706832000-2', '0.0.987657-1706918400-3']
-    }
+      hcs: [
+        '1706745600.012345678',
+        '1706832000.123456789',
+        '1706918400.234567890',
+      ],
+      hts: [
+        '0.0.987657-1706745600-1',
+        '0.0.987657-1706832000-2',
+        '0.0.987657-1706918400-3',
+      ],
+    },
   },
   {
     id: 'well-005',
@@ -167,9 +205,17 @@ export const mockWells: Well[] = [
     nextMaintenance: '2024-04-25',
     coordinates: { lat: -7.7956, lng: 110.3695 },
     proofs: {
-      hcs: ['1706140800.345678901', '1706227200.456789012', '1706313600.567890123'],
-      hts: ['0.0.987658-1706140800-1', '0.0.987658-1706227200-2', '0.0.987658-1706313600-3']
-    }
+      hcs: [
+        '1706140800.345678901',
+        '1706227200.456789012',
+        '1706313600.567890123',
+      ],
+      hts: [
+        '0.0.987658-1706140800-1',
+        '0.0.987658-1706227200-2',
+        '0.0.987658-1706313600-3',
+      ],
+    },
   },
   {
     id: 'well-006',
@@ -193,9 +239,17 @@ export const mockWells: Well[] = [
     nextMaintenance: '2024-04-18',
     coordinates: { lat: -5.1477, lng: 119.4327 },
     proofs: {
-      hcs: ['1705536000.678901234', '1705622400.789012345', '1705708800.890123456'],
-      hts: ['0.0.987659-1705536000-1', '0.0.987659-1705622400-2', '0.0.987659-1705708800-3']
-    }
+      hcs: [
+        '1705536000.678901234',
+        '1705622400.789012345',
+        '1705708800.890123456',
+      ],
+      hts: [
+        '0.0.987659-1705536000-1',
+        '0.0.987659-1705622400-2',
+        '0.0.987659-1705708800-3',
+      ],
+    },
   },
   // 3 Impact Wells
   {
@@ -218,11 +272,19 @@ export const mockWells: Well[] = [
     deviceId: 'RLI-007',
     lastMaintenance: '2024-01-12',
     nextMaintenance: '2024-04-12',
-    coordinates: { lat: -8.6500, lng: 116.3242 },
+    coordinates: { lat: -8.65, lng: 116.3242 },
     proofs: {
-      hcs: ['1704240000.901234567', '1704326400.012345678', '1704412800.123456789'],
-      hts: ['0.0.987660-1704240000-1', '0.0.987660-1704326400-2', '0.0.987660-1704412800-3']
-    }
+      hcs: [
+        '1704240000.901234567',
+        '1704326400.012345678',
+        '1704412800.123456789',
+      ],
+      hts: [
+        '0.0.987660-1704240000-1',
+        '0.0.987660-1704326400-2',
+        '0.0.987660-1704412800-3',
+      ],
+    },
   },
   {
     id: 'well-008',
@@ -247,8 +309,8 @@ export const mockWells: Well[] = [
     coordinates: { lat: -2.5489, lng: 140.7197 },
     proofs: {
       hcs: ['1706832000.234567890', '1706918400.345678901'],
-      hts: ['0.0.987661-1706832000-1', '0.0.987661-1706918400-2']
-    }
+      hts: ['0.0.987661-1706832000-1', '0.0.987661-1706918400-2'],
+    },
   },
   {
     id: 'well-009',
@@ -272,10 +334,18 @@ export const mockWells: Well[] = [
     nextMaintenance: '2024-04-08',
     coordinates: { lat: -8.8476, lng: 121.6619 },
     proofs: {
-      hcs: ['1704499200.456789012', '1704585600.567890123', '1704672000.678901234'],
-      hts: ['0.0.987662-1704499200-1', '0.0.987662-1704585600-2', '0.0.987662-1704672000-3']
-    }
-  }
+      hcs: [
+        '1704499200.456789012',
+        '1704585600.567890123',
+        '1704672000.678901234',
+      ],
+      hts: [
+        '0.0.987662-1704499200-1',
+        '0.0.987662-1704585600-2',
+        '0.0.987662-1704672000-3',
+      ],
+    },
+  },
 ];
 
 export const mockTransactions: Transaction[] = [
@@ -289,7 +359,7 @@ export const mockTransactions: Transaction[] = [
     htsId: '0.0.987654-1704067200-1',
     hcsId: '1704067200.123456789',
     status: 'confirmed',
-    description: 'User deposit for water purchase'
+    description: 'User deposit for water purchase',
   },
   {
     id: 'tx-002',
@@ -300,7 +370,7 @@ export const mockTransactions: Transaction[] = [
     htsId: '0.0.987654-1704153600-2',
     hcsId: '1704153600.234567890',
     status: 'confirmed',
-    description: 'Water dispensed - 17 liters'
+    description: 'Water dispensed - 17 liters',
   },
   {
     id: 'tx-003',
@@ -311,7 +381,7 @@ export const mockTransactions: Transaction[] = [
     htsId: '0.0.987654-1704240000-3',
     hcsId: '1704240000.345678901',
     status: 'confirmed',
-    description: 'Automatic refund - unused balance'
+    description: 'Automatic refund - unused balance',
   },
   // Transactions for well-002
   {
@@ -323,7 +393,7 @@ export const mockTransactions: Transaction[] = [
     htsId: '0.0.987655-1704326400-1',
     hcsId: '1704326400.456789012',
     status: 'confirmed',
-    description: 'Monthly revenue settlement'
+    description: 'Monthly revenue settlement',
   },
   {
     id: 'tx-005',
@@ -334,7 +404,7 @@ export const mockTransactions: Transaction[] = [
     htsId: '0.0.987655-1704412800-2',
     hcsId: '1704412800.567890123',
     status: 'confirmed',
-    description: 'Tariff updated: 0.06 → 0.065 per liter'
+    description: 'Tariff updated: 0.06 → 0.065 per liter',
   },
   // Transactions for well-007 (Impact)
   {
@@ -346,7 +416,7 @@ export const mockTransactions: Transaction[] = [
     htsId: '0.0.987660-1704240000-1',
     hcsId: '1704240000.901234567',
     status: 'confirmed',
-    description: 'Scheduled maintenance - filter replacement'
+    description: 'Scheduled maintenance - filter replacement',
   },
   {
     id: 'tx-007',
@@ -357,8 +427,8 @@ export const mockTransactions: Transaction[] = [
     htsId: '0.0.987661-1706832000-1',
     hcsId: '1706832000.234567890',
     status: 'confirmed',
-    description: 'Initial funding for well construction'
-  }
+    description: 'Initial funding for well construction',
+  },
 ];
 
 // Helper functions
@@ -383,9 +453,21 @@ export const getTotalStats = () => {
   return {
     totalWells: mockWells.length,
     activeWells: activeWells.length,
-    totalPeopleServed: mockWells.reduce((sum, well) => sum + well.peopleServed, 0),
-    totalMonthlyRevenue: activeWells.reduce((sum, well) => sum + well.monthlyRevenue, 0),
-    averageAPR: activeWells.filter(w => w.type === 'Cashflow').reduce((sum, well) => sum + well.apr, 0) / activeWells.filter(w => w.type === 'Cashflow').length,
-    averageUptime: activeWells.reduce((sum, well) => sum + well.uptime, 0) / activeWells.length
+    totalPeopleServed: mockWells.reduce(
+      (sum, well) => sum + well.peopleServed,
+      0
+    ),
+    totalMonthlyRevenue: activeWells.reduce(
+      (sum, well) => sum + well.monthlyRevenue,
+      0
+    ),
+    averageAPR:
+      activeWells
+        .filter(w => w.type === 'Cashflow')
+        .reduce((sum, well) => sum + well.apr, 0) /
+      activeWells.filter(w => w.type === 'Cashflow').length,
+    averageUptime:
+      activeWells.reduce((sum, well) => sum + well.uptime, 0) /
+      activeWells.length,
   };
 };

@@ -1,6 +1,12 @@
 'use client';
 
-import { ShieldCheck, ChartLine, Workflow, Lock, BadgeCheck } from 'lucide-react';
+import {
+  ShieldCheck,
+  ChartLine,
+  Workflow,
+  Lock,
+  BadgeCheck,
+} from 'lucide-react';
 
 interface SolutionItem {
   title: string;
@@ -51,21 +57,30 @@ export function SolutionSection() {
             </span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Dua model bisnis yang saling melengkapi: monetisasi sumur existing dan funding untuk sumur baru dengan Hedera blockchain.
+            Dua model bisnis yang saling melengkapi: monetisasi sumur existing
+            dan funding untuk sumur baru dengan Hedera blockchain.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {solutions.map((item, idx) => (
-            <div key={idx} className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
+            <div
+              key={idx}
+              className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100"
+            >
               <div className="w-14 h-14 rounded-xl bg-green-100 text-green-700 flex items-center justify-center mb-6">
                 <BadgeCheck className="h-7 w-7" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">{item.title}</h3>
+              <h3 className="text-2xl font-bold text-slate-900 mb-3">
+                {item.title}
+              </h3>
               <p className="text-slate-600 mb-4">{item.description}</p>
               <ul className="space-y-2">
                 {item.highlights.map((h, i) => (
-                  <li key={i} className="flex items-start text-sm text-slate-600">
+                  <li
+                    key={i}
+                    className="flex items-start text-sm text-slate-600"
+                  >
                     <span className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0" />
                     {h}
                   </li>
@@ -78,10 +93,12 @@ export function SolutionSection() {
         <div className="mt-16 grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-100">
             <h4 className="font-semibold text-slate-900 mb-2 flex items-center gap-2">
-              <ChartLine className="h-5 w-5 text-green-600" /> ROI Terkait Kinerja
+              <ChartLine className="h-5 w-5 text-green-600" /> ROI Terkait
+              Kinerja
             </h4>
             <p className="text-sm text-slate-600">
-              Return investor ditautkan ke output air bersih, menghilangkan asimetri informasi.
+              Return investor ditautkan ke output air bersih, menghilangkan
+              asimetri informasi.
             </p>
           </div>
           <div className="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-100">
@@ -89,7 +106,8 @@ export function SolutionSection() {
               <Workflow className="h-5 w-5 text-green-600" /> Otomasi Pembayaran
             </h4>
             <p className="text-sm text-slate-600">
-              Distribusi hasil via HTS; pembagian otomatis berdasarkan persentase kepemilikan token.
+              Distribusi hasil via HTS; pembagian otomatis berdasarkan
+              persentase kepemilikan token.
             </p>
           </div>
           <div className="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-100">
@@ -97,7 +115,8 @@ export function SolutionSection() {
               <Lock className="h-5 w-5 text-green-600" /> Audit Real-time
             </h4>
             <p className="text-sm text-slate-600">
-              Semua peristiwa operasional dipublish ke HCS, dapat diaudit kapan saja.
+              Semua peristiwa operasional dipublish ke HCS, dapat diaudit kapan
+              saja.
             </p>
           </div>
         </div>

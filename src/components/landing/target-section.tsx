@@ -1,6 +1,6 @@
 'use client';
 
-import { Building2, Users, Shield, Landmark } from 'lucide-react';
+import { Building2, Users, Shield } from 'lucide-react';
 
 const targets = [
   {
@@ -34,20 +34,34 @@ export function TargetSection() {
             Target Customer
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Kami membangun produk untuk investor institusi, operator, dan komunitas yang ingin transparansi & hasil nyata.
+            Kami membangun produk untuk investor institusi, operator, dan
+            komunitas yang ingin transparansi & hasil nyata.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {targets.map((t, i) => (
-            <div key={i} className="bg-gradient-to-br from-slate-50 to-white border border-slate-100 rounded-2xl p-8">
+            <div
+              key={i}
+              className="bg-gradient-to-br from-slate-50 to-white border border-slate-100 rounded-2xl p-8"
+            >
               <div className="flex items-center justify-between mb-4">
                 <div className="w-10 h-10 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center">
-                  {i === 0 ? <Building2 className="h-6 w-6" /> : i === 1 ? <Shield className="h-6 w-6" /> : <Users className="h-6 w-6" />}
+                  {i === 0 ? (
+                    <Building2 className="h-6 w-6" />
+                  ) : i === 1 ? (
+                    <Shield className="h-6 w-6" />
+                  ) : (
+                    <Users className="h-6 w-6" />
+                  )}
                 </div>
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-700">{t.badge}</span>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-700">
+                  {t.badge}
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">{t.title}</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
+                {t.title}
+              </h3>
               <p className="text-slate-600">{t.desc}</p>
             </div>
           ))}

@@ -44,17 +44,24 @@ export function ProductSection() {
             Product Overview
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            2 halaman: Landing (SSR) + Dashboard (SPA 6 tab). Every action = Hedera proof (HTS tx / HCS id). Demo ≤ 170s, 9 cards live wells, proof clickable.
+            2 halaman: Landing (SSR) + Dashboard (SPA 6 tab). Every action =
+            Hedera proof (HTS tx / HCS id). Demo ≤ 170s, 9 cards live wells,
+            proof clickable.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {productFeatures.map((f, i) => (
-            <div key={i} className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-100 shadow-lg">
+            <div
+              key={i}
+              className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-100 shadow-lg"
+            >
               <div className="w-14 h-14 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-6">
                 {f.icon}
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">{f.title}</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
+                {f.title}
+              </h3>
               <p className="text-slate-600">{f.desc}</p>
             </div>
           ))}

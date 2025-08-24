@@ -64,13 +64,18 @@ export function HeroSection() {
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-600 mb-6 max-w-4xl mx-auto leading-relaxed">
-             100k kios @ 2.2k L/day = $2.2M/day; HCS logs liters, HTS splits revenue, NFT funds new wells for drylands.
+            100k kios @ 2.2k L/day = $2.2M/day; HCS logs liters, HTS splits
+            revenue, NFT funds new wells for drylands.
+          </p>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg font-semibold text-blue-800 mb-2">
+              Proof-of-Impact:
             </p>
-            
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 max-w-2xl mx-auto">
-              <p className="text-lg font-semibold text-blue-800 mb-2">Proof-of-Impact:</p>
-              <p className="text-blue-700">Every 10 Liters = HCS Event = Audited Revenue</p>
-            </div>
+            <p className="text-blue-700">
+              Every 10 Liters = HCS Event = Audited Revenue
+            </p>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Button
@@ -90,21 +95,33 @@ export function HeroSection() {
               size="lg"
               className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300"
             >
-              <Link href="https://hashscan.io" target="_blank">View Ledger (Proofs)</Link>
+              <Link href="https://hashscan.io" target="_blank">
+                View Ledger (Proofs)
+              </Link>
             </Button>
           </div>
-          
+
           <div className="bg-slate-100 border border-slate-200 rounded-lg p-4 max-w-3xl mx-auto mb-12">
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm">
               <div className="flex items-center gap-2">
                 <span className="text-slate-600">HCS Today: 3,250 deltas</span>
-                <Link href="https://mirror.hedera.com" target="_blank" className="text-blue-600 hover:text-blue-800 underline">
+                <Link
+                  href="https://mirror.hedera.com"
+                  target="_blank"
+                  className="text-blue-600 hover:text-blue-800 underline"
+                >
                   Open in Mirror
                 </Link>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-slate-600">Last Settlement: 0x8f…a3c</span>
-                <Link href="https://hashscan.io" target="_blank" className="text-blue-600 hover:text-blue-800 underline">
+                <span className="text-slate-600">
+                  Last Settlement: 0x8f&hellip;a3c
+                </span>
+                <Link
+                  href="https://hashscan.io"
+                  target="_blank"
+                  className="text-blue-600 hover:text-blue-800 underline"
+                >
                   Open in HashScan
                 </Link>
               </div>

@@ -1,25 +1,38 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import ProofPill from '@/components/ui/proof-pill'
-import { 
-  Copy, 
-  Download, 
-  ExternalLink, 
-  FileText, 
-  Shield, 
+import { useState } from 'react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import ProofPill from '@/components/ui/proof-pill';
+import {
+  Copy,
+  Download,
+  ExternalLink,
+  FileText,
+  Shield,
   Clock,
   CheckCircle,
   AlertTriangle,
   Database,
-  Activity
-} from 'lucide-react'
-import { toast } from 'sonner'
+  Activity,
+} from 'lucide-react';
+import { toast } from 'sonner';
 
 // Mock data untuk HCS Stream
 const hcsStreamData = [
@@ -34,7 +47,7 @@ const hcsStreamData = [
     liters: 2500,
     status: 'CONFIRMED',
     runningHash: '0x1a2b3c4d5e6f...',
-    validStart: '2024-01-15 14:30:20'
+    validStart: '2024-01-15 14:30:20',
   },
   {
     id: '2',
@@ -47,7 +60,7 @@ const hcsStreamData = [
     newTariff: '0.025 HBAR/L',
     status: 'CONFIRMED',
     runningHash: '0x2b3c4d5e6f7a...',
-    validStart: '2024-01-15 14:25:15'
+    validStart: '2024-01-15 14:25:15',
   },
   {
     id: '3',
@@ -60,9 +73,9 @@ const hcsStreamData = [
     deviceId: 'SENSOR-A1',
     status: 'CONFIRMED',
     runningHash: '0x3c4d5e6f7a8b...',
-    validStart: '2024-01-15 14:20:40'
-  }
-]
+    validStart: '2024-01-15 14:20:40',
+  },
+];
 
 // Mock data untuk HTS Transfers
 const htsTransferData = [
@@ -77,7 +90,7 @@ const htsTransferData = [
     amount: 2500,
     type: 'PURCHASE',
     status: 'SUCCESS',
-    fee: '0.001 HBAR'
+    fee: '0.001 HBAR',
   },
   {
     id: '2',
@@ -90,7 +103,7 @@ const htsTransferData = [
     amount: 1800,
     type: 'TRANSFER',
     status: 'SUCCESS',
-    fee: '0.001 HBAR'
+    fee: '0.001 HBAR',
   },
   {
     id: '3',
@@ -103,9 +116,9 @@ const htsTransferData = [
     amount: 3200,
     type: 'MINT',
     status: 'SUCCESS',
-    fee: '0.002 HBAR'
-  }
-]
+    fee: '0.002 HBAR',
+  },
+];
 
 // Mock reconciliation data
 const reconciliationData = {
@@ -117,47 +130,65 @@ const reconciliationData = {
   lastReconciliation: '2024-01-15 14:00:00',
   status: 'BALANCED',
   variance: 200,
-  variancePercentage: 0.16
-}
+  variancePercentage: 0.16,
+};
 
 function AuditPublicReadOnly() {
-  const [activeTab, setActiveTab] = useState('hcs-stream')
-  const [selectedWell, setSelectedWell] = useState('WELL-001')
+  const [activeTab, setActiveTab] = useState('hcs-stream');
+  const [selectedWell, setSelectedWell] = useState('WELL-001');
 
   const copyAuditUrl = () => {
-    const auditUrl = `https://waternity.io/audit/${selectedWell}`
-    navigator.clipboard.writeText(auditUrl)
-    toast.success('Audit URL copied to clipboard')
-  }
+    const auditUrl = `https://waternity.io/audit/${selectedWell}`;
+    navigator.clipboard.writeText(auditUrl);
+    toast.success('Audit URL copied to clipboard');
+  };
 
   const exportData = (format: 'csv' | 'json') => {
-    toast.success(`Exporting data as ${format.toUpperCase()}...`)
+    toast.success(`Exporting data as ${format.toUpperCase()}...`);
     // Implement actual export logic here
-  }
+  };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'CONFIRMED':
       case 'SUCCESS':
       case 'BALANCED':
-        return <Badge variant="default" className="bg-green-100 text-green-800"><CheckCircle className="w-3 h-3 mr-1" />{status}</Badge>
+        return (
+          <Badge variant="default" className="bg-green-100 text-green-800">
+            <CheckCircle className="w-3 h-3 mr-1" />
+            {status}
+          </Badge>
+        );
       case 'PENDING':
-        return <Badge variant="secondary"><Clock className="w-3 h-3 mr-1" />{status}</Badge>
+        return (
+          <Badge variant="secondary">
+            <Clock className="w-3 h-3 mr-1" />
+            {status}
+          </Badge>
+        );
       case 'FAILED':
-        return <Badge variant="destructive"><AlertTriangle className="w-3 h-3 mr-1" />{status}</Badge>
+        return (
+          <Badge variant="destructive">
+            <AlertTriangle className="w-3 h-3 mr-1" />
+            {status}
+          </Badge>
+        );
       default:
-        return <Badge variant="outline">{status}</Badge>
+        return <Badge variant="outline">{status}</Badge>;
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Public Audit Trail</h2>
+          <h2 className="text-2xl font-bold tracking-tight">
+            Public Audit Trail
+          </h2>
           <p className="text-muted-foreground">
-            Transparent, immutable record of all water production and transactions
+            Transparent, immutable record of all water production and
+            transactions
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -169,7 +200,11 @@ function AuditPublicReadOnly() {
             <Download className="w-4 h-4 mr-2" />
             Export CSV
           </Button>
-          <Button variant="outline" size="sm" onClick={() => exportData('json')}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => exportData('json')}
+          >
             <FileText className="w-4 h-4 mr-2" />
             Export JSON
           </Button>
@@ -188,9 +223,9 @@ function AuditPublicReadOnly() {
           <div className="flex items-center gap-4">
             <div>
               <label className="text-sm font-medium">Selected Well:</label>
-              <select 
-                value={selectedWell} 
-                onChange={(e) => setSelectedWell(e.target.value)}
+              <select
+                value={selectedWell}
+                onChange={e => setSelectedWell(e.target.value)}
                 className="ml-2 px-3 py-1 border rounded-md"
               >
                 <option value="WELL-001">WELL-001 - Bandung Aquifer</option>
@@ -200,7 +235,9 @@ function AuditPublicReadOnly() {
             </div>
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-green-600" />
-              <span className="text-sm text-green-600 font-medium">Verified & Immutable</span>
+              <span className="text-sm text-green-600 font-medium">
+                Verified & Immutable
+              </span>
             </div>
           </div>
         </CardContent>
@@ -214,25 +251,34 @@ function AuditPublicReadOnly() {
             Real-time Reconciliation
           </CardTitle>
           <CardDescription>
-            Automated balance verification between physical production and digital tokens
+            Automated balance verification between physical production and
+            digital tokens
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600">{reconciliationData.totalProduced.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-blue-600">
+                {reconciliationData.totalProduced.toLocaleString()}
+              </div>
               <div className="text-sm text-blue-600">Liters Produced</div>
             </div>
             <div className="text-center p-4 bg-green-50 rounded-lg">
-              <div className="text-2xl font-bold text-green-600">{reconciliationData.totalMinted.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-green-600">
+                {reconciliationData.totalMinted.toLocaleString()}
+              </div>
               <div className="text-sm text-green-600">Tokens Minted</div>
             </div>
             <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <div className="text-2xl font-bold text-purple-600">{reconciliationData.currentSupply.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-purple-600">
+                {reconciliationData.currentSupply.toLocaleString()}
+              </div>
               <div className="text-sm text-purple-600">Current Supply</div>
             </div>
             <div className="text-center p-4 bg-gray-50 rounded-lg">
-              <div className="text-2xl font-bold text-gray-600">{reconciliationData.variancePercentage}%</div>
+              <div className="text-2xl font-bold text-gray-600">
+                {reconciliationData.variancePercentage}%
+              </div>
               <div className="text-sm text-gray-600">Variance</div>
               {getStatusBadge(reconciliationData.status)}
             </div>
@@ -267,15 +313,19 @@ function AuditPublicReadOnly() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {hcsStreamData.map((record) => (
+                  {hcsStreamData.map(record => (
                     <TableRow key={record.id}>
-                      <TableCell className="font-mono text-sm">{record.timestamp}</TableCell>
+                      <TableCell className="font-mono text-sm">
+                        {record.timestamp}
+                      </TableCell>
                       <TableCell>
                         <Badge variant="outline">{record.messageType}</Badge>
                       </TableCell>
                       <TableCell>
                         {record.messageType === 'WELL_PRODUCTION' && (
-                          <span>{record.liters} liters from {record.wellId}</span>
+                          <span>
+                            {record.liters} liters from {record.wellId}
+                          </span>
                         )}
                         {record.messageType === 'TARIFF_UPDATE' && (
                           <span>New tariff: {record.newTariff}</span>
@@ -286,8 +336,8 @@ function AuditPublicReadOnly() {
                       </TableCell>
                       <TableCell>{getStatusBadge(record.status)}</TableCell>
                       <TableCell>
-                        <ProofPill 
-                          type="HCS" 
+                        <ProofPill
+                          type="HCS"
                           id={record.consensusId}
                           label={`Seq ${record.sequenceNumber}`}
                         />
@@ -322,12 +372,20 @@ function AuditPublicReadOnly() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {htsTransferData.map((transfer) => (
+                  {htsTransferData.map(transfer => (
                     <TableRow key={transfer.id}>
-                      <TableCell className="font-mono text-sm">{transfer.timestamp}</TableCell>
+                      <TableCell className="font-mono text-sm">
+                        {transfer.timestamp}
+                      </TableCell>
                       <TableCell>
-                        <Badge 
-                          variant={transfer.type === 'MINT' ? 'default' : transfer.type === 'PURCHASE' ? 'secondary' : 'outline'}
+                        <Badge
+                          variant={
+                            transfer.type === 'MINT'
+                              ? 'default'
+                              : transfer.type === 'PURCHASE'
+                                ? 'secondary'
+                                : 'outline'
+                          }
                         >
                           {transfer.type}
                         </Badge>
@@ -335,15 +393,21 @@ function AuditPublicReadOnly() {
                       <TableCell className="font-mono text-xs">
                         {transfer.from === '0.0.0' ? 'MINT' : transfer.from}
                       </TableCell>
-                      <TableCell className="font-mono text-xs">{transfer.to}</TableCell>
+                      <TableCell className="font-mono text-xs">
+                        {transfer.to}
+                      </TableCell>
                       <TableCell>
-                        <span className="font-medium">{transfer.amount.toLocaleString()}</span>
-                        <span className="text-muted-foreground ml-1">{transfer.tokenSymbol}</span>
+                        <span className="font-medium">
+                          {transfer.amount.toLocaleString()}
+                        </span>
+                        <span className="text-muted-foreground ml-1">
+                          {transfer.tokenSymbol}
+                        </span>
                       </TableCell>
                       <TableCell>{getStatusBadge(transfer.status)}</TableCell>
                       <TableCell>
-                        <ProofPill 
-                          type="HTS" 
+                        <ProofPill
+                          type="HTS"
                           id={transfer.transactionId}
                           label="View Tx"
                         />
@@ -374,7 +438,7 @@ function AuditPublicReadOnly() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
 export { AuditPublicReadOnly };

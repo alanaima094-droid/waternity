@@ -1,19 +1,25 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import ProofPill from '@/components/ui/proof-pill'
-import { 
-  Plus, 
-  Upload, 
-  FileText, 
-  DollarSign, 
+import { useState } from 'react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import ProofPill from '@/components/ui/proof-pill';
+import {
+  Plus,
+  Upload,
+  FileText,
+  DollarSign,
   Link,
   CheckCircle,
   Clock,
@@ -23,9 +29,9 @@ import {
   Shield,
   Database,
   Users,
-  MapPin
-} from 'lucide-react'
-import { toast } from 'sonner'
+  MapPin,
+} from 'lucide-react';
+import { toast } from 'sonner';
 
 // Mock data untuk wells yang sudah ada
 const existingWells = [
@@ -37,7 +43,7 @@ const existingWells = [
     nftId: '0.0.456789',
     escrowId: '0.0.567890',
     deviceId: 'SENSOR-A1',
-    contractor: 'PT Aqua Drill Indonesia'
+    contractor: 'PT Aqua Drill Indonesia',
   },
   {
     id: 'WELL-002',
@@ -47,9 +53,9 @@ const existingWells = [
     nftId: '0.0.456790',
     escrowId: '0.0.567891',
     deviceId: 'SENSOR-B2',
-    contractor: 'CV Water Solutions'
-  }
-]
+    contractor: 'CV Water Solutions',
+  },
+];
 
 // Mock data untuk contractors
 const contractors = [
@@ -59,7 +65,7 @@ const contractors = [
     walletId: '0.0.111111',
     specialization: 'Deep Well Drilling',
     rating: 4.8,
-    completedProjects: 45
+    completedProjects: 45,
   },
   {
     id: 'CONT-002',
@@ -67,7 +73,7 @@ const contractors = [
     walletId: '0.0.222222',
     specialization: 'Water System Installation',
     rating: 4.6,
-    completedProjects: 32
+    completedProjects: 32,
   },
   {
     id: 'CONT-003',
@@ -75,9 +81,9 @@ const contractors = [
     walletId: '0.0.333333',
     specialization: 'IoT Device Integration',
     rating: 4.9,
-    completedProjects: 28
-  }
-]
+    completedProjects: 28,
+  },
+];
 
 // Mock data untuk pending transactions
 const pendingTransactions = [
@@ -87,7 +93,7 @@ const pendingTransactions = [
     wellId: 'WELL-003',
     status: 'PENDING',
     timestamp: '2024-01-15 14:30:00',
-    txId: '0.0.123456@1705329000.123456789'
+    txId: '0.0.123456@1705329000.123456789',
   },
   {
     id: 'TX-002',
@@ -96,15 +102,15 @@ const pendingTransactions = [
     amount: '50000 HBAR',
     status: 'CONFIRMED',
     timestamp: '2024-01-15 14:25:00',
-    txId: '0.0.123457@1705328700.987654321'
-  }
-]
+    txId: '0.0.123457@1705328700.987654321',
+  },
+];
 
 function AdminMintWellCapex() {
-  const [activeTab, setActiveTab] = useState('mint-nft')
-  const [selectedWell, setSelectedWell] = useState('')
-  const [selectedContractor, setSelectedContractor] = useState('')
-  const [isProcessing, setIsProcessing] = useState(false)
+  const [activeTab, setActiveTab] = useState('mint-nft');
+  const [selectedWell, setSelectedWell] = useState('');
+  const [selectedContractor, setSelectedContractor] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
   // Form states
   const [wellForm, setWellForm] = useState({
@@ -113,36 +119,36 @@ function AdminMintWellCapex() {
     coordinates: '',
     depth: '',
     capacity: '',
-    description: ''
-  })
+    description: '',
+  });
 
   const [escrowForm, setEscrowForm] = useState({
     amount: '',
     contractor: '',
     milestones: '',
-    duration: ''
-  })
+    duration: '',
+  });
 
   const [payoutForm, setPayoutForm] = useState({
     contractor: '',
     amount: '',
     milestone: '',
-    description: ''
-  })
+    description: '',
+  });
 
   const [deviceForm, setDeviceForm] = useState({
     deviceId: '',
     deviceType: '',
     wellId: '',
-    calibrationData: ''
-  })
+    calibrationData: '',
+  });
 
   const handleMintNFT = async () => {
-    setIsProcessing(true)
+    setIsProcessing(true);
     try {
       // Simulate minting process
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      toast.success('Well NFT minted successfully!')
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      toast.success('Well NFT minted successfully!');
       // Reset form
       setWellForm({
         name: '',
@@ -150,97 +156,116 @@ function AdminMintWellCapex() {
         coordinates: '',
         depth: '',
         capacity: '',
-        description: ''
-      })
+        description: '',
+      });
     } catch (error) {
-      toast.error('Failed to mint NFT')
+      toast.error('Failed to mint NFT');
     } finally {
-      setIsProcessing(false)
+      setIsProcessing(false);
     }
-  }
+  };
 
   const handleCreateEscrow = async () => {
-    setIsProcessing(true)
+    setIsProcessing(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      toast.success('Escrow contract created successfully!')
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      toast.success('Escrow contract created successfully!');
       setEscrowForm({
         amount: '',
         contractor: '',
         milestones: '',
-        duration: ''
-      })
+        duration: '',
+      });
     } catch (error) {
-      toast.error('Failed to create escrow')
+      toast.error('Failed to create escrow');
     } finally {
-      setIsProcessing(false)
+      setIsProcessing(false);
     }
-  }
+  };
 
   const handlePayoutContractor = async () => {
-    setIsProcessing(true)
+    setIsProcessing(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      toast.success('Contractor payment processed successfully!')
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      toast.success('Contractor payment processed successfully!');
       setPayoutForm({
         contractor: '',
         amount: '',
         milestone: '',
-        description: ''
-      })
+        description: '',
+      });
     } catch (error) {
-      toast.error('Failed to process payment')
+      toast.error('Failed to process payment');
     } finally {
-      setIsProcessing(false)
+      setIsProcessing(false);
     }
-  }
+  };
 
   const handleBindDevice = async () => {
-    setIsProcessing(true)
+    setIsProcessing(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      toast.success('Device bound to well successfully!')
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      toast.success('Device bound to well successfully!');
       setDeviceForm({
         deviceId: '',
         deviceType: '',
         wellId: '',
-        calibrationData: ''
-      })
+        calibrationData: '',
+      });
     } catch (error) {
-      toast.error('Failed to bind device')
+      toast.error('Failed to bind device');
     } finally {
-      setIsProcessing(false)
+      setIsProcessing(false);
     }
-  }
+  };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'ACTIVE':
       case 'CONFIRMED':
-        return <Badge variant="default" className="bg-green-100 text-green-800"><CheckCircle className="w-3 h-3 mr-1" />{status}</Badge>
+        return (
+          <Badge variant="default" className="bg-green-100 text-green-800">
+            <CheckCircle className="w-3 h-3 mr-1" />
+            {status}
+          </Badge>
+        );
       case 'PENDING':
       case 'MAINTENANCE':
-        return <Badge variant="secondary"><Clock className="w-3 h-3 mr-1" />{status}</Badge>
+        return (
+          <Badge variant="secondary">
+            <Clock className="w-3 h-3 mr-1" />
+            {status}
+          </Badge>
+        );
       case 'FAILED':
-        return <Badge variant="destructive"><AlertTriangle className="w-3 h-3 mr-1" />{status}</Badge>
+        return (
+          <Badge variant="destructive">
+            <AlertTriangle className="w-3 h-3 mr-1" />
+            {status}
+          </Badge>
+        );
       default:
-        return <Badge variant="outline">{status}</Badge>
+        return <Badge variant="outline">{status}</Badge>;
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Admin Control Panel</h2>
+          <h2 className="text-2xl font-bold tracking-tight">
+            Admin Control Panel
+          </h2>
           <p className="text-muted-foreground">
             Mint new wells, manage escrows, and coordinate contractor operations
           </p>
         </div>
         <div className="flex items-center gap-2">
           <Shield className="w-5 h-5 text-blue-600" />
-          <span className="text-sm font-medium text-blue-600">Admin Access</span>
+          <span className="text-sm font-medium text-blue-600">
+            Admin Access
+          </span>
         </div>
       </div>
 
@@ -250,8 +275,12 @@ function AdminMintWellCapex() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Active Wells</p>
-                <p className="text-2xl font-bold">{existingWells.filter(w => w.status === 'ACTIVE').length}</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Active Wells
+                </p>
+                <p className="text-2xl font-bold">
+                  {existingWells.filter(w => w.status === 'ACTIVE').length}
+                </p>
               </div>
               <Database className="w-8 h-8 text-blue-500" />
             </div>
@@ -261,7 +290,9 @@ function AdminMintWellCapex() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Contractors</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Contractors
+                </p>
                 <p className="text-2xl font-bold">{contractors.length}</p>
               </div>
               <Users className="w-8 h-8 text-green-500" />
@@ -272,8 +303,15 @@ function AdminMintWellCapex() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Pending Tx</p>
-                <p className="text-2xl font-bold">{pendingTransactions.filter(tx => tx.status === 'PENDING').length}</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Pending Tx
+                </p>
+                <p className="text-2xl font-bold">
+                  {
+                    pendingTransactions.filter(tx => tx.status === 'PENDING')
+                      .length
+                  }
+                </p>
               </div>
               <Clock className="w-8 h-8 text-yellow-500" />
             </div>
@@ -283,7 +321,9 @@ function AdminMintWellCapex() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Total Escrow</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Total Escrow
+                </p>
                 <p className="text-2xl font-bold">150K</p>
                 <p className="text-xs text-muted-foreground">HBAR</p>
               </div>
@@ -322,7 +362,9 @@ function AdminMintWellCapex() {
                     id="well-name"
                     placeholder="e.g., Surabaya Springs Gamma"
                     value={wellForm.name}
-                    onChange={(e) => setWellForm({...wellForm, name: e.target.value})}
+                    onChange={e =>
+                      setWellForm({ ...wellForm, name: e.target.value })
+                    }
                   />
                 </div>
                 <div className="space-y-2">
@@ -331,7 +373,9 @@ function AdminMintWellCapex() {
                     id="well-location"
                     placeholder="e.g., Surabaya, East Java"
                     value={wellForm.location}
-                    onChange={(e) => setWellForm({...wellForm, location: e.target.value})}
+                    onChange={e =>
+                      setWellForm({ ...wellForm, location: e.target.value })
+                    }
                   />
                 </div>
                 <div className="space-y-2">
@@ -340,7 +384,9 @@ function AdminMintWellCapex() {
                     id="coordinates"
                     placeholder="e.g., -7.2575, 112.7521"
                     value={wellForm.coordinates}
-                    onChange={(e) => setWellForm({...wellForm, coordinates: e.target.value})}
+                    onChange={e =>
+                      setWellForm({ ...wellForm, coordinates: e.target.value })
+                    }
                   />
                 </div>
                 <div className="space-y-2">
@@ -350,7 +396,9 @@ function AdminMintWellCapex() {
                     type="number"
                     placeholder="e.g., 150"
                     value={wellForm.depth}
-                    onChange={(e) => setWellForm({...wellForm, depth: e.target.value})}
+                    onChange={e =>
+                      setWellForm({ ...wellForm, depth: e.target.value })
+                    }
                   />
                 </div>
                 <div className="space-y-2">
@@ -360,7 +408,9 @@ function AdminMintWellCapex() {
                     type="number"
                     placeholder="e.g., 5000"
                     value={wellForm.capacity}
-                    onChange={(e) => setWellForm({...wellForm, capacity: e.target.value})}
+                    onChange={e =>
+                      setWellForm({ ...wellForm, capacity: e.target.value })
+                    }
                   />
                 </div>
               </div>
@@ -370,23 +420,23 @@ function AdminMintWellCapex() {
                   id="description"
                   placeholder="Detailed description of the well project..."
                   value={wellForm.description}
-                  onChange={(e) => setWellForm({...wellForm, description: e.target.value})}
+                  onChange={e =>
+                    setWellForm({ ...wellForm, description: e.target.value })
+                  }
                 />
               </div>
               <div className="flex items-center gap-4">
-                <Button 
-                  onClick={handleMintNFT} 
-                  disabled={isProcessing || !wellForm.name || !wellForm.location}
+                <Button
+                  onClick={handleMintNFT}
+                  disabled={
+                    isProcessing || !wellForm.name || !wellForm.location
+                  }
                   className="flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" />
                   {isProcessing ? 'Minting...' : 'Mint Well NFT'}
                 </Button>
-                <ProofPill 
-                  type="HTS" 
-                  id="0.0.456791"
-                  label="Preview NFT"
-                />
+                <ProofPill type="HTS" id="0.0.456791" label="Preview NFT" />
               </div>
             </CardContent>
           </Card>
@@ -412,15 +462,22 @@ function AdminMintWellCapex() {
                     type="number"
                     placeholder="e.g., 50000"
                     value={escrowForm.amount}
-                    onChange={(e) => setEscrowForm({...escrowForm, amount: e.target.value})}
+                    onChange={e =>
+                      setEscrowForm({ ...escrowForm, amount: e.target.value })
+                    }
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="contractor-select">Contractor</Label>
-                  <select 
+                  <select
                     id="contractor-select"
                     value={escrowForm.contractor}
-                    onChange={(e) => setEscrowForm({...escrowForm, contractor: e.target.value})}
+                    onChange={e =>
+                      setEscrowForm({
+                        ...escrowForm,
+                        contractor: e.target.value,
+                      })
+                    }
                     className="w-full px-3 py-2 border rounded-md"
                   >
                     <option value="">Select contractor...</option>
@@ -438,7 +495,9 @@ function AdminMintWellCapex() {
                     type="number"
                     placeholder="e.g., 90"
                     value={escrowForm.duration}
-                    onChange={(e) => setEscrowForm({...escrowForm, duration: e.target.value})}
+                    onChange={e =>
+                      setEscrowForm({ ...escrowForm, duration: e.target.value })
+                    }
                   />
                 </div>
               </div>
@@ -448,23 +507,23 @@ function AdminMintWellCapex() {
                   id="milestones"
                   placeholder="e.g., 30% - Site preparation, 40% - Drilling completion, 30% - Testing & handover"
                   value={escrowForm.milestones}
-                  onChange={(e) => setEscrowForm({...escrowForm, milestones: e.target.value})}
+                  onChange={e =>
+                    setEscrowForm({ ...escrowForm, milestones: e.target.value })
+                  }
                 />
               </div>
               <div className="flex items-center gap-4">
-                <Button 
-                  onClick={handleCreateEscrow} 
-                  disabled={isProcessing || !escrowForm.amount || !escrowForm.contractor}
+                <Button
+                  onClick={handleCreateEscrow}
+                  disabled={
+                    isProcessing || !escrowForm.amount || !escrowForm.contractor
+                  }
                   className="flex items-center gap-2"
                 >
                   <Shield className="w-4 h-4" />
                   {isProcessing ? 'Creating...' : 'Create Escrow'}
                 </Button>
-                <ProofPill 
-                  type="HTS" 
-                  id="0.0.567892"
-                  label="Escrow Contract"
-                />
+                <ProofPill type="HTS" id="0.0.567892" label="Escrow Contract" />
               </div>
             </CardContent>
           </Card>
@@ -488,7 +547,10 @@ function AdminMintWellCapex() {
                 <p className="text-sm text-muted-foreground mb-4">
                   Drag and drop files or click to browse
                 </p>
-                <Button variant="outline" onClick={() => toast.message('File picker opened (mock)')}>
+                <Button
+                  variant="outline"
+                  onClick={() => toast.message('File picker opened (mock)')}
+                >
                   <Upload className="w-4 h-4 mr-2" />
                   Choose Files
                 </Button>
@@ -496,24 +558,32 @@ function AdminMintWellCapex() {
               <div className="space-y-2">
                 <Label>Document Types</Label>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  {['Environmental Impact', 'Technical Specs', 'Permits & Licenses', 'Financial Reports'].map(type => (
+                  {[
+                    'Environmental Impact',
+                    'Technical Specs',
+                    'Permits & Licenses',
+                    'Financial Reports',
+                  ].map(type => (
                     <div key={type} className="flex items-center space-x-2">
                       <input type="checkbox" id={type} className="rounded" />
-                      <label htmlFor={type} className="text-sm">{type}</label>
+                      <label htmlFor={type} className="text-sm">
+                        {type}
+                      </label>
                     </div>
                   ))}
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <Button className="flex items-center gap-2" onClick={() => toast.success('Documents published to HCS (mock)')}>
+                <Button
+                  className="flex items-center gap-2"
+                  onClick={() =>
+                    toast.success('Documents published to HCS (mock)')
+                  }
+                >
                   <FileText className="w-4 h-4" />
                   Publish to HCS
                 </Button>
-                <ProofPill 
-                  type="HCS" 
-                  id="0.0.789013"
-                  label="Document Hash"
-                />
+                <ProofPill type="HCS" id="0.0.789013" label="Document Hash" />
               </div>
             </CardContent>
           </Card>
@@ -534,10 +604,15 @@ function AdminMintWellCapex() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="payout-contractor">Contractor</Label>
-                  <select 
+                  <select
                     id="payout-contractor"
                     value={payoutForm.contractor}
-                    onChange={(e) => setPayoutForm({...payoutForm, contractor: e.target.value})}
+                    onChange={e =>
+                      setPayoutForm({
+                        ...payoutForm,
+                        contractor: e.target.value,
+                      })
+                    }
                     className="w-full px-3 py-2 border rounded-md"
                   >
                     <option value="">Select contractor...</option>
@@ -555,15 +630,22 @@ function AdminMintWellCapex() {
                     type="number"
                     placeholder="e.g., 15000"
                     value={payoutForm.amount}
-                    onChange={(e) => setPayoutForm({...payoutForm, amount: e.target.value})}
+                    onChange={e =>
+                      setPayoutForm({ ...payoutForm, amount: e.target.value })
+                    }
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="milestone">Milestone</Label>
-                  <select 
+                  <select
                     id="milestone"
                     value={payoutForm.milestone}
-                    onChange={(e) => setPayoutForm({...payoutForm, milestone: e.target.value})}
+                    onChange={e =>
+                      setPayoutForm({
+                        ...payoutForm,
+                        milestone: e.target.value,
+                      })
+                    }
                     className="w-full px-3 py-2 border rounded-md"
                   >
                     <option value="">Select milestone...</option>
@@ -579,23 +661,26 @@ function AdminMintWellCapex() {
                   id="payout-description"
                   placeholder="Description of completed work and milestone achieved..."
                   value={payoutForm.description}
-                  onChange={(e) => setPayoutForm({...payoutForm, description: e.target.value})}
+                  onChange={e =>
+                    setPayoutForm({
+                      ...payoutForm,
+                      description: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="flex items-center gap-4">
-                <Button 
-                  onClick={handlePayoutContractor} 
-                  disabled={isProcessing || !payoutForm.contractor || !payoutForm.amount}
+                <Button
+                  onClick={handlePayoutContractor}
+                  disabled={
+                    isProcessing || !payoutForm.contractor || !payoutForm.amount
+                  }
                   className="flex items-center gap-2"
                 >
                   <DollarSign className="w-4 h-4" />
                   {isProcessing ? 'Processing...' : 'Process Payment'}
                 </Button>
-                <ProofPill 
-                  type="HTS" 
-                  id="0.0.678901"
-                  label="Payment Tx"
-                />
+                <ProofPill type="HTS" id="0.0.678901" label="Payment Tx" />
               </div>
             </CardContent>
           </Card>
@@ -620,15 +705,22 @@ function AdminMintWellCapex() {
                     id="device-id"
                     placeholder="e.g., SENSOR-C3"
                     value={deviceForm.deviceId}
-                    onChange={(e) => setDeviceForm({...deviceForm, deviceId: e.target.value})}
+                    onChange={e =>
+                      setDeviceForm({ ...deviceForm, deviceId: e.target.value })
+                    }
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="device-type">Device Type</Label>
-                  <select 
+                  <select
                     id="device-type"
                     value={deviceForm.deviceType}
-                    onChange={(e) => setDeviceForm({...deviceForm, deviceType: e.target.value})}
+                    onChange={e =>
+                      setDeviceForm({
+                        ...deviceForm,
+                        deviceType: e.target.value,
+                      })
+                    }
                     className="w-full px-3 py-2 border rounded-md"
                   >
                     <option value="">Select device type...</option>
@@ -640,10 +732,12 @@ function AdminMintWellCapex() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="bind-well">Target Well</Label>
-                  <select 
+                  <select
                     id="bind-well"
                     value={deviceForm.wellId}
-                    onChange={(e) => setDeviceForm({...deviceForm, wellId: e.target.value})}
+                    onChange={e =>
+                      setDeviceForm({ ...deviceForm, wellId: e.target.value })
+                    }
                     className="w-full px-3 py-2 border rounded-md"
                   >
                     <option value="">Select well...</option>
@@ -661,23 +755,26 @@ function AdminMintWellCapex() {
                   id="calibration-data"
                   placeholder="Initial calibration parameters and baseline readings..."
                   value={deviceForm.calibrationData}
-                  onChange={(e) => setDeviceForm({...deviceForm, calibrationData: e.target.value})}
+                  onChange={e =>
+                    setDeviceForm({
+                      ...deviceForm,
+                      calibrationData: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="flex items-center gap-4">
-                <Button 
-                  onClick={handleBindDevice} 
-                  disabled={isProcessing || !deviceForm.deviceId || !deviceForm.wellId}
+                <Button
+                  onClick={handleBindDevice}
+                  disabled={
+                    isProcessing || !deviceForm.deviceId || !deviceForm.wellId
+                  }
                   className="flex items-center gap-2"
                 >
                   <Link className="w-4 h-4" />
                   {isProcessing ? 'Binding...' : 'Bind Device'}
                 </Button>
-                <ProofPill 
-                  type="HCS" 
-                  id="0.0.789014"
-                  label="Device Binding"
-                />
+                <ProofPill type="HCS" id="0.0.789014" label="Device Binding" />
               </div>
             </CardContent>
           </Card>
@@ -694,22 +791,23 @@ function AdminMintWellCapex() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {pendingTransactions.map((tx) => (
-              <div key={tx.id} className="flex items-center justify-between p-3 border rounded-lg">
+            {pendingTransactions.map(tx => (
+              <div
+                key={tx.id}
+                className="flex items-center justify-between p-3 border rounded-lg"
+              >
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                   <div>
                     <p className="font-medium">{tx.type.replace('_', ' ')}</p>
-                    <p className="text-sm text-muted-foreground">{tx.wellId} • {tx.timestamp}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {tx.wellId} • {tx.timestamp}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   {getStatusBadge(tx.status)}
-                  <ProofPill 
-                    type="HTS" 
-                    id={tx.txId}
-                    label="View Tx"
-                  />
+                  <ProofPill type="HTS" id={tx.txId} label="View Tx" />
                 </div>
               </div>
             ))}
@@ -717,7 +815,7 @@ function AdminMintWellCapex() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
 export { AdminMintWellCapex };
