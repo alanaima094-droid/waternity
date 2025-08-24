@@ -1,0 +1,60 @@
+# Logs and databases #
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+Thumbs.db
+ehthumbs.db
+
+# Directories #
+/bin/
+/tmp/
+/temp/
+
+# Packages #
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Build generated files #
+/build/
+/dist/
+/out/
+
+# Dependency directories #
+node_modules/
+bower_components/
+vendor/
+
+# Editor directories and files #
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Misc #
+*.swp
+*~.nib
+*.bak
+*.class
+*.dll
+*.exe
+*.o
+*.obj
+*.pyc
+*.pyo
+*.so
+
+# Add more specific ignores if needed for your project

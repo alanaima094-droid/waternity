@@ -1,0 +1,38 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Custom for specific file types
+*.c text
+*.cpp text
+*.h text
+*.java text
+*.js text
+*.json text
+*.md text
+*.py text
+*.rb text
+*.sh text
+*.txt text
+
+# Denote binary files
+*.jpg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.bin binary
+*.exe binary
+
+# Language-specific
+*.cs diff=csharp
+*.java diff=java
+*.html diff=html
+*.js diff=javascript
+*.perl diff=perl
+*.php diff=php
+*.py diff=python
+*.rb diff=ruby
+*.css diff=css
+
+# Ensure CRLF for Windows scripts
+*.bat eol=crlf
+*.cmd eol=crlf
