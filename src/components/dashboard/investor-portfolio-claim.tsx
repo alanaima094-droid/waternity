@@ -337,7 +337,7 @@ export function InvestorPortfolioClaim() {
                         type="HTS"
                         id={position.htsTokenId}
                         label="Position Token"
-                        variant="outline"
+                        variant="default"
                         size="sm"
                       />
                     </div>
@@ -392,7 +392,7 @@ export function InvestorPortfolioClaim() {
                           type="HTS"
                           id={cashflow.htsTransactionId}
                           label="Transaction"
-                          variant="outline"
+                          variant="warning"
                           size="sm"
                         />
                       </div>
@@ -456,7 +456,7 @@ export function InvestorPortfolioClaim() {
                           type="HTS"
                           id={cashflow.htsTransactionId}
                           label="Transaction"
-                          variant="outline"
+                          variant="success"
                           size="sm"
                         />
                       </div>
@@ -514,7 +514,7 @@ export function InvestorPortfolioClaim() {
                           type="HTS"
                           id={cashflow.htsTransactionId}
                           label="Transaction"
-                          variant="outline"
+                          variant="success"
                           size="sm"
                         />
                       </div>

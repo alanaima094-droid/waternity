@@ -108,7 +108,13 @@ const ToastDescription = React.forwardRef<
 ));
 ToastDescription.displayName = ToastPrimitives.Description.displayName;
 
-export { type ToastProps } from './use-toast';
+// Define and export types used by hooks
+export type ToastActionElement = React.ReactElement<typeof ToastAction>;
+export type ToastProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
+  VariantProps<typeof toastVariants>;
+
+// Removed redundant re-export to avoid duplicate declarations
+// export type { ToastActionElement, ToastProps };
 export {
   Toast,
   ToastAction,
